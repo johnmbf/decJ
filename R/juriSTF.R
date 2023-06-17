@@ -70,3 +70,38 @@ juriSTF.tabela = function(busca, quantidade, UA){
   return(getContent$result$hits$hits$`_source`)
 
 }
+
+#' Baixa as decisões extraídas da página de jurisprudências do STF
+#'
+#'`juriSTF.download` permite baixar as decisões do site de site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
+#'
+#' @param conteudo Objeto `html` que pode ser obtido com a função [juriSTF.conteudo()]
+#' @param UA User-Agent
+#' @param arquivo Local onde será salvo as decisões
+#' @param quantidade Quantidade de decisões que se pretende baixar \(não maior do que as buscadas com a função `juriSTF.conteudo`\). Pode ser colocado um valor referente a posição do conteúdo.
+#'
+#' @return Decisões em `.pdf`
+#' @export
+#'
+#' @examples
+juriSTF.download = function(conteudo, UA, arquivo, quantidade){
+  for(i in 1:quantidade){
+    getConteudo <- content$result$hits$hits[[i]]$`_source`
+    doc <- stringr::str_split_i(
+      content$result$hits$hits[[i]]$`_source`$inteiro_teor_url,
+      pattern = '=',
+      -1
+    )
+    httr::POST(
+      paste(
+        'https://redir.stf.jus.br/paginadorpub/paginador.jsp?docTP=TP&docID=',
+        doc,
+        sep = ''
+      ),
+      httr::add_headers(
+        'User-Agent' = UA
+      ),
+      httr::write_disk(paste(arquivo,getConteudo$titulo, '.pdf', sep = ''), T)
+    )
+  }
+}
