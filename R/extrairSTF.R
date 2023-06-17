@@ -186,3 +186,97 @@ extrairSTF.info = function(lista, classe, n, UA){
   return(lista)
 
 }
+
+#' Extrair o relator do processo
+#'
+#' @description
+#' `extrairSTF.relator()` permite extrair do site do Supremo Tribunal Federal dados de relator dos processos.
+#'
+#' @param lista Uma lista
+#' @param classe Um caracter que indica a classe processual
+#' @param n Um número que indica o número do processo
+#' @param UA User-Agent
+#'
+#' @return Uma lista com os relatores dos processos requeridos.
+#' @export
+#'
+#' @author Essa função teve a colaboração de Gabriel Delias de Sousa Simões
+#'
+#' @examples
+#' # Extrair os dados da ADPF 800
+#' \dontrun{
+#' extrairSTF.relator(lista, "ADPF", 800, UA)
+#'}
+#'
+#' # Extrair os dados da ADI 500 a 600
+#' \dontrun{
+#' extrairSTF.relator(lista, "ADI", 500:600, UA)
+#' }
+extrairSTF.relator = function(lista, classe, n, UA){
+
+  for(i in n){ ## faça isso em cada processo ##
+
+    # Busque no site o processo
+    getProcesso <- httr::GET(
+      paste(
+        'https://portal.stf.jus.br/processos/listarProcessos.asp?classe=',
+        classe,
+        '&numeroProcesso=',
+        i,
+        sep = ''
+      ),
+      httr::add_headers(
+        'User-Agent' = UA
+      )
+    )
+
+    # Salve o incidente
+    getIncidente <- stringr::str_split_i(
+      getProcesso$url,
+      pattern = '=',
+      -1
+    )
+
+    # Buscar nos detalhes do processo
+    getDetalhe <- httr::GET(
+      paste('https://portal.stf.jus.br/processos/detalhe.asp?incidente=',
+            getIncidente,
+            sep = ''),
+      httr::add_headers(
+        'User-Agent' = UA
+      )
+    )
+
+    # Leia o conteúdo dos detalhes do processo
+    getConteudo <- httr::content(getDetalhe, encoding = 'UTF-8')
+
+    # Salve o relator  do processo
+    getRelator <- xml2::xml_find_all(
+      getConteudo,
+      "//div[@class='processo-dados p-l-16']"
+    ) %>% xml2::xml_text(trim = T)
+
+    # Limpe a string
+    getRelator <- getRelator[2]
+    getRelator <- getRelator %>% stringr::str_split_i('MIN\\.', -1)
+    getRelator <- stringr::str_trim(getRelator, side = 'both')
+
+    # Coloque os dados em uma tabela
+    data <- data.frame(
+      Classe = i,
+      Relator = getRelator
+    )
+
+    # Coloque os dados em uma lista
+    names(data)[names(data) == 'Classe'] <- classe
+    lista[[i]] <- data
+
+    # Aguarde 15 segundos
+    date_time<-Sys.time()
+    while((as.numeric(Sys.time()) - as.numeric(date_time))<15){}
+  }
+
+  # Devolva a lista com os relatores dos processos
+  return(lista)
+
+}
