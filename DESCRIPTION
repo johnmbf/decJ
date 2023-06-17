@@ -5,7 +5,7 @@ Authors@R:
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9946-2173"))
 Description: Conjunto de funções que permitem coletar e baixar dados de processos no Supremo Tribunal Federal, auxiliando em pesquisas sobre o Tribunal.
-License: CC BY-NC 4.0
+License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
