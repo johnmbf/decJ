@@ -3,3 +3,5 @@
 export(extrairSTF.info)
 export(extrairSTF.partes)
 export(extrairSTF.relator)
+export(juriSTF.conteudo)
+export(juriSTF.tabela)
