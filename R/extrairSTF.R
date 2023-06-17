@@ -78,8 +78,7 @@ extrairSTF.partes = function(lista, classe, n, UA){
     )
 
     # Coloque os dados em uma lista
-    data$i <- i
-    names(data$Classe) <- classe
+    names(data)[names(data) == 'Classe'] <- classe
     lista[[i]] <- data
 
     # Aguarde 15 segundos
@@ -175,8 +174,7 @@ extrairSTF.info = function(lista, classe, n, UA){
     )
 
     # Coloque os dados em uma lista
-    data$i <- i
-    names(data$Classe) <- classe
+    names(data)[names(data) == 'Classe'] <- classe
     lista[[i]] <- data
 
     # Aguarde 15 segundos
