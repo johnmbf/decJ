@@ -152,18 +152,18 @@ extrairSTF.info = function(lista, classe, n, UA){
     )
 
     # Leia o conteúdo da aba informações
-    c <- httr::content(b, encoding = 'UTF-8')
+    getConteudo <- httr::content(getInfo, encoding = 'UTF-8')
 
     # Salve o conteúdo da aba informações
     ## Data do protocolo (ajuizamento)
     getProtocolo <- xml2::xml_find_all(
-      c,
+      getConteudo,
       "//div[@class='col-md-5 processo-detalhes-bold m-l-0']"
     ) %>% xml2::xml_text(trim = T)
 
     ## Assunto do processo
     getAssunto <- xml2::xml_find_all(
-      c,
+      getConteudo,
       "//div[@class='col-md-10 processo-detalhes']"
     ) %>% xml2::xml_text(trim = T)
 
@@ -185,6 +185,6 @@ extrairSTF.info = function(lista, classe, n, UA){
   }
 
   # Devolva a lista com os processos
-  return(datalist)
+  return(lista)
 
 }
