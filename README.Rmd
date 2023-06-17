@@ -13,6 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r include=FALSE}
+load('data.RData')
+```
+
+
 # decJ
 
 <!-- badges: start -->
@@ -22,13 +27,32 @@ O pacote decJ tem como objetivo auxiliar as pesquisas envolvendo dados de proces
 
 ## Instalação
 
-Você pode baixar a versão de desenvolvedor em [GitHub](https://github.com/) com:
+Você pode baixar a versão de desenvolvedor em [GitHub](https://github.com/johnmbf/decJ) com:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("johnmbf/decJ")
 ```
 
-## Exemplo
+## Exemplos
 
+A função `extrairSTF.partes( )` retorna uma lista com dados das partes do processo que for requerido. O exemplo abaixo busca as partes da ADI 6201.
+
+```{r}
+library(decJ)
+
+listaPartes <- list()
+listaPartes <- extrairSTF.partes(listaPartes, 'ADI', 6201, UA)
+listaPartes[[6201]]
+```
+
+A função `extrairSTF.info( )` retorna uma lista com dados de protocolo e assunto que for requerido. O exemplo abaixo busca a data de protocolo e assunto da ADC 26.
+
+```{r}
+library(decJ)
+
+listaInfo <- list()
+listaInfo <- extrairSTF.info(listaInfo, 'ADC', 26, UA)
+listaInfo[[26]]
+```
 
