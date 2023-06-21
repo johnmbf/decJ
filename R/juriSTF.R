@@ -15,9 +15,6 @@ juriSTF.conteudo = function(busca, quantidade, UA){
   # Arquivo de busca json
   stfBusca <- jsonlite::read_json(busca)
 
-  # Quantidade de registros que vão ser buscados
-  stfBusca$size <- quantidade
-
   # Extração dos dados
   htmlSTF <- httr::POST(
     'https://jurisprudencia.stf.jus.br/api/search/search',
@@ -68,6 +65,58 @@ juriSTF.tabela = function(busca, quantidade, UA){
 
   # Retorna uma tabela com o conteúdo
   return(getContent$result$hits$hits$`_source`)
+
+}
+
+#' Tabelar o conteúdo grande (+250) da página de jurisprudências do STF
+#'
+#' @param lista
+#' @param busca
+#' @param quantidade
+#' @param UA
+#'
+#' @return
+#' @export
+#'
+#' @examples
+juriSTF.tabela250 = function(lista, busca, quantidade, UA){
+
+  x <- trunc(quantidade / 250)
+
+  # Arquivo de busca json
+  stfBusca <- jsonlite::read_json(busca)
+
+  # Quantidade de registros que vão ser buscados
+  if(quantidade > 250){
+    quantidade <- 250
+  } else {
+    quantidade
+  }
+  stfBusca$size <- quantidade
+
+  for(i in 1:x) {
+
+    stfBusca$from <- (i - 1) * 250
+    # Extração dos dados
+    htmlSTF <- httr::POST(
+      'https://jurisprudencia.stf.jus.br/api/search/search',
+      body = stfBusca,
+      encode = 'json',
+      httr::add_headers(
+        'User-Agent' = UA
+      )
+    )
+
+    # Coleta o conteudo
+    getContent <- jsonlite::fromJSON(httr::content(htmlSTF, 'text'))
+    getTable <- getContent$result$hits$hits$`_source`
+
+    lista[[i]] <- getTable
+
+  }
+
+  # Retorna uma tabela com o conteuo
+  return(bind_rows(lista))
 
 }
 

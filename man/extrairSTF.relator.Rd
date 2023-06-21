@@ -4,7 +4,7 @@
 \alias{extrairSTF.relator}
 \title{Extrair o relator do processo}
 \usage{
-extrairSTF.relator(lista, classe, n, UA)
+extrairSTF.relator(lista, classe, n)
 }
 \arguments{
 \item{lista}{Uma lista}
@@ -12,8 +12,6 @@ extrairSTF.relator(lista, classe, n, UA)
 \item{classe}{Um caracter que indica a classe processual}
 
 \item{n}{Um número que indica o número do processo}
-
-\item{UA}{User-Agent}
 }
 \value{
 Uma lista com os relatores dos processos requeridos.

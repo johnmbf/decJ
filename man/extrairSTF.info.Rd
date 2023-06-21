@@ -4,7 +4,7 @@
 \alias{extrairSTF.info}
 \title{Extrair data do protocolo e assunto do processo}
 \usage{
-extrairSTF.info(lista, classe, n, UA)
+extrairSTF.info(lista, classe, n)
 }
 \arguments{
 \item{lista}{Uma lista}
@@ -12,8 +12,6 @@ extrairSTF.info(lista, classe, n, UA)
 \item{classe}{Um caracter que indica a classe processual}
 
 \item{n}{Um número que indica o número do processo}
-
-\item{UA}{User-Agent}
 }
 \value{
 Uma lista com as datas de ajuizamento e assuntos requeridos.

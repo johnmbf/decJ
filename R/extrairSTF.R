@@ -6,7 +6,6 @@
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
 #' @param n Um número que indica o número do processo
-#' @param UA User-Agent
 #'
 #' @return Uma lista com os dados das partes requeridos.
 #' @export
@@ -21,7 +20,11 @@
 #' \dontrun{
 #' extrairSTF.partes(lista, "ADI", 500:600, UA)
 #' }
-extrairSTF.partes = function(lista, classe, n, UA){
+extrairSTF.partes = function(lista, classe, n){
+
+  UA <- 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51'
+
+  print("Extraindo ADPF:")
 
   for(i in n){  ## faça isso em cada processo ##
 
@@ -84,7 +87,11 @@ extrairSTF.partes = function(lista, classe, n, UA){
     # Aguarde 15 segundos
     date_time<-Sys.time()
     while((as.numeric(Sys.time()) - as.numeric(date_time))<5){}
+
+    print(i)
   }
+
+  beepr::beep(1)
 
   # Devolva a lista com os processos
   return(lista)
@@ -100,7 +107,6 @@ extrairSTF.partes = function(lista, classe, n, UA){
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
 #' @param n Um número que indica o número do processo
-#' @param UA User-Agent
 #'
 #' @return Uma lista com as datas de ajuizamento e assuntos requeridos.
 #' @export
@@ -115,7 +121,11 @@ extrairSTF.partes = function(lista, classe, n, UA){
 #' \dontrun{
 #' extrairSTF.info(lista, "ADI", 500:600, UA)
 #' }
-extrairSTF.info = function(lista, classe, n, UA){
+extrairSTF.info = function(lista, classe, n){
+
+  UA <- 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51'
+
+  print("Extraindo ADPF:")
 
   for(i in n){ ## faça isso em cada processo ##
 
@@ -180,7 +190,11 @@ extrairSTF.info = function(lista, classe, n, UA){
     # Aguarde 5 segundos
     date_time<-Sys.time()
     while((as.numeric(Sys.time()) - as.numeric(date_time))<5){}
+
+    print(i)
   }
+
+  beepr::beep(1)
 
   # Devolva a lista com os processos
   return(lista)
@@ -195,7 +209,6 @@ extrairSTF.info = function(lista, classe, n, UA){
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
 #' @param n Um número que indica o número do processo
-#' @param UA User-Agent
 #'
 #' @return Uma lista com os relatores dos processos requeridos.
 #' @export
@@ -212,7 +225,11 @@ extrairSTF.info = function(lista, classe, n, UA){
 #' \dontrun{
 #' extrairSTF.relator(lista, "ADI", 500:600, UA)
 #' }
-extrairSTF.relator = function(lista, classe, n, UA){
+extrairSTF.relator = function(lista, classe, n){
+
+  UA <- 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51'
+
+  print("Extraindo ADPF:")
 
   for(i in n){ ## faça isso em cada processo ##
 
@@ -274,7 +291,11 @@ extrairSTF.relator = function(lista, classe, n, UA){
     # Aguarde 15 segundos
     date_time<-Sys.time()
     while((as.numeric(Sys.time()) - as.numeric(date_time))<5){}
+
+    print(i)
   }
+
+  beepr::beep(1)
 
   # Devolva a lista com os relatores dos processos
   return(lista)
@@ -289,7 +310,6 @@ extrairSTF.relator = function(lista, classe, n, UA){
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
 #' @param n Um número que indica o número do processo
-#' @param UA User-Agent
 #'
 #' @return Uma lista com as decisões dos processos requeridos.
 #' @export
@@ -304,7 +324,11 @@ extrairSTF.relator = function(lista, classe, n, UA){
 #' \dontrun{
 #' extrairSTF.decisao(lista, "ADI", 500:600, UA)
 #' }
-extrairSTF.decisao = function(lista, classe, n, UA){
+extrairSTF.decisao = function(lista, classe, n){
+
+  UA <- 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51'
+
+  print("Extraindo ADPF:")
 
   for(i in n){ ## faça isso em cada processo ##
 
@@ -342,26 +366,37 @@ extrairSTF.decisao = function(lista, classe, n, UA){
     # Leia o conteúdo das decisões do processo
     getConteudo <- httr::content(getDecisao, encoding = 'UTF-8')
 
+    contentTeste <-
+      xml2::xml_find_all(getConteudo, "//div[@class='andamento-data']") |>
+      xml2::xml_text(trim = T)
+
+    if(is.na(contentTeste[1])){
+      getData <- NA
+      getNome_Decisao <- NA
+      getJulgador <- NA
+      getConteudo_Decisao <- NA
+    } else {
     # Salve as decisões do processo
     getData <- xml2::xml_find_all(
       getConteudo,
       "//div[@class='andamento-data']"
-    ) %>% xml2::xml_text(trim = T)
+    ) |> xml2::xml_text(trim = T)
 
     getNome_Decisao <- xml2::xml_find_all(
       getConteudo,
-      "//h5[@class='andamento-nome']"
-    ) %>% xml2::xml_text(trim = T)
+      "//div[@class='col-md-5 p-l-0']"
+    ) |> xml2::xml_text(trim = T)
 
     getJulgador <- xml2::xml_find_all(
       getConteudo,
-      "//span[@class='andamento-julgador badge bg-info']"
-    ) %>% xml2::xml_text(trim = T)
+      "//div[@class='col-md-3 p-0']"
+    ) |> xml2::xml_text(trim = T)
 
     getConteudo_Decisao <- xml2::xml_find_all(
       getConteudo,
       "//div[@class='col-md-9 p-0']"
-    ) %>% xml2::xml_text(trim = T)
+    ) |> xml2::xml_text(trim = T)
+    }
 
     # Coloque os dados em uma tabela
     data <- data.frame(
@@ -379,8 +414,11 @@ extrairSTF.decisao = function(lista, classe, n, UA){
     # Aguarde 5 segundos
     date_time<-Sys.time()
     while((as.numeric(Sys.time()) - as.numeric(date_time))<5){}
+
+    print(i)
   }
 
+  beepr::beep(1)
   # Devolva a lista com as decisões dos processos
   return(lista)
 
