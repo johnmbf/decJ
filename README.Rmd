@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r include=FALSE}
+```{r include = FALSE}
 load('data.RData')
 ```
 
@@ -38,7 +38,7 @@ devtools::install_github("johnmbf/decJ")
 
 A função `extrairSTF.partes( )` retorna uma lista com dados das partes do processo que for requerido. O exemplo abaixo busca as partes da ADI 6201 e retorna um `data frame` com os dados da ADI 6201.
 
-```{r}
+```{r eval = FALSE}
 library(decJ)
 
 listaPartes <- list()
@@ -48,7 +48,7 @@ listaPartes[[6201]] %>% as_tibble()
 
 A função `extrairSTF.info( )` retorna uma lista com dados de protocolo e assunto que for requerido. O exemplo abaixo busca a data de protocolo e assunto da ADC 26 e retorna em um `data frame`.
 
-```{r}
+```{r eval = FALSE}
 library(decJ)
 
 listaInfo <- list()
