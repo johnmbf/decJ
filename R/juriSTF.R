@@ -1,19 +1,22 @@
+# Extrair conteúdo ----
+
 #' Pegar o conteúdo da página de jurisprudências do STF
 #'
 #'`juriSTF.conteudo` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
-#' @param UA User-Agent
 #'
 #' @return Um objeto `html` com o conteúdo
 #' @export
 #'
 #' @examples
-juriSTF.conteudo = function(busca, quantidade, UA){
+juriSTF.conteudo = function(busca, quantidade){
+  UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
   stfBusca <- jsonlite::read_json(busca)
+  stfBusca$size <- quantidade
 
   # Extração dos dados
   htmlSTF <- httr::POST(
@@ -30,22 +33,25 @@ juriSTF.conteudo = function(busca, quantidade, UA){
 
 }
 
+# Extrair tabela ----
+
 #' Tabelar o conteúdo da página de jurisprudências do STF
 #'
 #'`juriSTF.tabela` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br) e devolver em uma tabela.
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
-#' @param UA User-Agent
 #'
 #' @return Uma tabela com o conteúdo
 #' @export
 #'
 #' @examples
-juriSTF.tabela = function(busca, quantidade, UA){
+juriSTF.tabela = function(busca, quantidade){
+  UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
   stfBusca <- jsonlite::read_json(busca)
+  stfBusca$size <- quantidade
 
   # Quantidade de registros que vão ser buscados
   stfBusca$size <- quantidade
@@ -67,6 +73,8 @@ juriSTF.tabela = function(busca, quantidade, UA){
   return(getContent$result$hits$hits$`_source`)
 
 }
+
+# Extrair conteúdo grande ----
 
 #' Tabelar o conteúdo grande (+250) da página de jurisprudências do STF
 #'
@@ -118,10 +126,12 @@ juriSTF.tabela250 = function(busca, quantidade){
 
   }
 
-  # Retorna uma tabela com o conteuo
+  # Retorna uma tabela com o conteudo
   return(bind_rows(lista))
 
 }
+
+# Baixar decisões ----
 
 #' Baixa as decisões extraídas da página de jurisprudências do STF
 #'
@@ -138,9 +148,9 @@ juriSTF.tabela250 = function(busca, quantidade){
 #' @examples
 juriSTF.download = function(conteudo, UA, arquivo, quantidade){
   for(i in 1:quantidade){
-    getConteudo <- content$result$hits$hits[[i]]$`_source`
+    getConteudo <- conteudo$result$hits$hits[[i]]$`_source`
     doc <- stringr::str_split_i(
-      content$result$hits$hits[[i]]$`_source`$inteiro_teor_url,
+      conteudo$result$hits$hits[[i]]$`_source`$inteiro_teor_url,
       pattern = '=',
       -1
     )

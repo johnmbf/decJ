@@ -1,3 +1,5 @@
+# Extrair partes ----
+
 #' Extrair partes do processo
 #'
 #' @description
@@ -98,6 +100,7 @@ extrairSTF.partes = function(lista, classe, n){
 
 }
 
+# Extrair info ----
 
 #' Extrair data do protocolo e assunto do processo
 #'
@@ -201,6 +204,8 @@ extrairSTF.info = function(lista, classe, n){
 
 }
 
+# Extrair relator ----
+
 #' Extrair o relator do processo
 #'
 #' @description
@@ -301,6 +306,8 @@ extrairSTF.relator = function(lista, classe, n){
   return(lista)
 
 }
+
+# Extrair decisões ----
 
 #' Extrair as decisões do processo
 #'
