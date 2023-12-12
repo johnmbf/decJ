@@ -12,17 +12,7 @@
 #'
 #'
 #' @examples
-#' # Pesquisa com apenas uma palavra-chave:
-#' df <- oasis_to_rayyan('judicialização')
-#'
-#' # Pesquisa com mais de uma palavra mas que a ordem importa:
-#' df <- oasis_to_rayyan('"judicialização da política"')
-#'
-#' # Pesquisa com conjunto(s) de palavras:
-#' df <- oasis_to_rayyan('"judicialização da política" AND "supremo tribunal federal"')
-#' df <- oasis_to_rayyan('("judicialização da política" AND "supremo tribunal federal") AND ("partidos políticos" OR "presidente da república")')
-oasis_to_rayyan = function(pesquisa) {
-
+oasis_to_rayyan <- function(pesquisa) {
   headers <- c("accept" = "application/json")
 
   parametros <- list(
@@ -36,13 +26,15 @@ oasis_to_rayyan = function(pesquisa) {
 
   lista_id <- list()
 
-  n_page <- httr::GET(url = "https://oasisbr.ibict.br/vufind/api/v1/search",
-                      httr::add_headers(.headers = headers),
-                      query = parametros) |>
-    httr::content('text') |>
+  n_page <- httr::GET(
+    url = "https://oasisbr.ibict.br/vufind/api/v1/search",
+    httr::add_headers(.headers = headers),
+    query = parametros
+  ) |>
+    httr::content("text") |>
     jsonlite::fromJSON()
 
-  for (i in 1:ceiling(n_page$resultCount/100)) {
+  for (i in 1:ceiling(n_page$resultCount / 100)) {
     parametros$page <- i
 
     # Primeiro vamos buscar os ID
@@ -64,11 +56,10 @@ oasis_to_rayyan = function(pesquisa) {
   lista_registros <- list()
 
   for (i in 1:length(id)) {
-
     # Busca o registro (pesquisa)
     registro <- httr::GET(
       url = paste("https://oasisbr.ibict.br/vufind/Record/", id[i], sep = "") |>
-        stringr::str_replace_all('\\s', '%20') # precisei substituir os espaços (\\s) por %20 (que é um código de espaço)
+        stringr::str_replace_all("\\s", "%20") # precisei substituir os espaços (\\s) por %20 (que é um código de espaço)
     )
 
     # Conteúdo do registro
@@ -88,24 +79,29 @@ oasis_to_rayyan = function(pesquisa) {
 
     # aqui é só um penduricário para eu acompanhar o progresso
     ## Ele retorna no console qual registro foi concluído do total de registros
-    print(paste('Registro: ', i, ' de ', length(id), sep = ''))
+    print(paste("Registro: ", i, " de ", length(id), sep = ""))
   }
 
   tabela_registros <- dplyr::bind_rows(lista_registros)
 
   tabela_registros <- tabela_registros |>
-    dplyr::select(title, author_facet, description,
-                  topic, publishDate, spelling, url) |>
-    dplyr::rename(authors = author_facet, abstract = description,
-                  keywords = topic, notes = spelling, year = publishDate) |>
-    dplyr::mutate(authors = stringr::str_replace_all(authors, '\n', '; ') |>
-                    stringr::str_squish(),
-                  keywords = keywords |> stringr::str_squish()) |>
+    dplyr::select(
+      title, author_facet, description,
+      topic, publishDate, spelling, url
+    ) |>
+    dplyr::rename(
+      authors = author_facet, abstract = description,
+      keywords = topic, notes = spelling, year = publishDate
+    ) |>
+    dplyr::mutate(
+      authors = stringr::str_replace_all(authors, "\n", "; ") |>
+        stringr::str_squish(),
+      keywords = keywords |> stringr::str_squish()
+    ) |>
     tibble::rownames_to_column() |>
     dplyr::rename(key = rowname)
 
   return(tabela_registros)
-
 }
 
 #' Oasis
@@ -122,17 +118,7 @@ oasis_to_rayyan = function(pesquisa) {
 #'
 #'
 #' @examples
-#' # Pesquisa com apenas uma palavra-chave:
-#' df <- oasis_to_rayyan('judicialização')
-#'
-#' # Pesquisa com mais de uma palavra mas que a ordem importa:
-#' df <- oasis_to_rayyan('"judicialização da política"')
-#'
-#' # Pesquisa com conjunto(s) de palavras:
-#' df <- oasis_to_rayyan('"judicialização da política" AND "supremo tribunal federal"')
-#' df <- oasis_to_rayyan('("judicialização da política" AND "supremo tribunal federal") AND ("partidos políticos" OR "presidente da república")')
-oasis = function(pesquisa) {
-
+oasis <- function(pesquisa) {
   headers <- c("accept" = "application/json")
 
   parametros <- list(
@@ -146,13 +132,15 @@ oasis = function(pesquisa) {
 
   lista_id <- list()
 
-  n_page <- httr::GET(url = "https://oasisbr.ibict.br/vufind/api/v1/search",
-                      httr::add_headers(.headers = headers),
-                      query = parametros) |>
-    httr::content('text') |>
+  n_page <- httr::GET(
+    url = "https://oasisbr.ibict.br/vufind/api/v1/search",
+    httr::add_headers(.headers = headers),
+    query = parametros
+  ) |>
+    httr::content("text") |>
     jsonlite::fromJSON()
 
-  for (i in 1:ceiling(n_page$resultCount/100)) {
+  for (i in 1:ceiling(n_page$resultCount / 100)) {
     parametros$page <- i
 
     # Primeiro vamos buscar os ID
@@ -174,11 +162,10 @@ oasis = function(pesquisa) {
   lista_registros <- list()
 
   for (i in 1:length(id)) {
-
     # Busca o registro (pesquisa)
     registro <- httr::GET(
       url = paste("https://oasisbr.ibict.br/vufind/Record/", id[i], sep = "") |>
-        stringr::str_replace_all('\\s', '%20') # precisei substituir os espaços (\\s) por %20 (que é um código de espaço)
+        stringr::str_replace_all("\\s", "%20") # precisei substituir os espaços (\\s) por %20 (que é um código de espaço)
     )
 
     # Conteúdo do registro
@@ -198,7 +185,7 @@ oasis = function(pesquisa) {
 
     # aqui é só um penduricário para eu acompanhar o progresso
     ## Ele retorna no console qual registro foi concluído do total de registros
-    print(paste('Registro: ', i, ' de ', length(id), sep = ''))
+    print(paste("Registro: ", i, " de ", length(id), sep = ""))
   }
 
   tabela_registros <- dplyr::bind_rows(lista_registros)
@@ -215,5 +202,4 @@ oasis = function(pesquisa) {
   #   dplyr::rename(key = rowname)
 
   return(tabela_registros)
-
 }

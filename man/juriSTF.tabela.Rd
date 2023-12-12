@@ -4,14 +4,12 @@
 \alias{juriSTF.tabela}
 \title{Tabelar o conteúdo da página de jurisprudências do STF}
 \usage{
-juriSTF.tabela(busca, quantidade, UA)
+juriSTF.tabela(busca, quantidade)
 }
 \arguments{
 \item{busca}{Arquivo \code{.json} com os parâmetros de busca}
 
 \item{quantidade}{Número de decisões que devem retornar}
-
-\item{UA}{User-Agent}
 }
 \value{
 Uma tabela com o conteúdo

@@ -4,14 +4,12 @@
 \alias{juriSTF.conteudo}
 \title{Pegar o conteúdo da página de jurisprudências do STF}
 \usage{
-juriSTF.conteudo(busca, quantidade, UA)
+juriSTF.conteudo(busca, quantidade)
 }
 \arguments{
 \item{busca}{Arquivo \code{.json} com os parâmetros de busca}
 
 \item{quantidade}{Número de decisões que devem retornar}
-
-\item{UA}{User-Agent}
 }
 \value{
 Um objeto \code{html} com o conteúdo

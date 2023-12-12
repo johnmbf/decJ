@@ -4,12 +4,10 @@
 \alias{downloadSTF.juris}
 \title{Baixa as decisões extraídas da página de jurisprudências do STF}
 \usage{
-downloadSTF.juris(conteudo, UA, arquivo, quantidade)
+downloadSTF.juris(conteudo, arquivo, quantidade)
 }
 \arguments{
 \item{conteudo}{Objeto \code{html} que pode ser obtido com a função \code{\link[=juriSTF.conteudo]{juriSTF.conteudo()}}}
-
-\item{UA}{User-Agent}
 
 \item{arquivo}{Local onde será salvo as decisões}
 

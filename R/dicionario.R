@@ -15,17 +15,14 @@
 #' @examples
 dicionario.Criar = function(token, n = 2, arquivo){
 
-  ngrams <- quanteda::tokens_ngrams(
+  quanteda::tokens_ngrams(
      token,
      n = n,
     concatenator = ' '
-  )
-
-  ngrams.dfm <- quanteda::dfm(ngrams)
-  ngrams.freq <- quanteda::topfeatures(ngrams.dfm, n = 500)
-
-  write.csv2(ngrams.freq,
-              file = paste(arquivo, n, 'gram.csv', sep = ''),
+  ) |>
+    quanteda::dfm() |>
+    quanteda::topfeatures(n = 500) |>
+    utils::write.csv2(file = paste(arquivo, n, 'gram.csv', sep = ''),
               quote = F,
               row.names = T,
               fileEncoding = 'UTF-8')
@@ -50,30 +47,33 @@ dicionario.Aplicar = function(token) {
   token <-
     quanteda::tokens_compound(
       token,
-      pattern = phrase(dic_6grams$V1)
+      pattern = quanteda::phrase(dic_6grams$V1)
     )
   # Aplica o dicionario 5grams
   token <-
     quanteda::tokens_compound(
       token,
-      pattern = phrase(dic_5grams$V1)
+      pattern = quanteda::phrase(dic_5grams$V1)
     )
   # Aplica o dicionario 4grams
   token <-
     quanteda::tokens_compound(
       token,
-      pattern = phrase(dic_4grams$V1)
+      pattern = quanteda::phrase(dic_4grams$V1)
     )
   # Aplica o dicionario 3grams
   token <-
     quanteda::tokens_compound(
       token,
-      pattern = phrase(dic_3grams$V1)
+      pattern = quanteda::phrase(dic_3grams$V1)
     )
   # Aplica o dicionario 2grams
   token <-
     quanteda::tokens_compound(
       token,
-      pattern = phrase(dic_2grams$V1)
+      pattern = quanteda::phrase(dic_2grams$V1)
     )
+
+  return(token)
+
 }

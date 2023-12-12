@@ -2,7 +2,7 @@
 
 #' Pegar o conteúdo da página de jurisprudências do STF
 #'
-#'`juriSTF.conteudo` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
+#' `juriSTF.conteudo` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-juriSTF.conteudo = function(busca, quantidade){
+juriSTF.conteudo <- function(busca, quantidade) {
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
@@ -20,24 +20,23 @@ juriSTF.conteudo = function(busca, quantidade){
 
   # Extração dos dados
   htmlSTF <- httr::POST(
-    'https://jurisprudencia.stf.jus.br/api/search/search',
+    "https://jurisprudencia.stf.jus.br/api/search/search",
     body = stfBusca,
-    encode = 'json',
+    encode = "json",
     httr::add_headers(
-      'User-Agent' = UA
+      "User-Agent" = UA
     )
   )
 
   # Retorna o conteúdo HTML
   return(httr::content(htmlSTF))
-
 }
 
 # Extrair tabela ----
 
 #' Tabelar o conteúdo da página de jurisprudências do STF
 #'
-#'`juriSTF.tabela` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br) e devolver em uma tabela.
+#' `juriSTF.tabela` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br) e devolver em uma tabela.
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
@@ -46,7 +45,7 @@ juriSTF.conteudo = function(busca, quantidade){
 #' @export
 #'
 #' @examples
-juriSTF.tabela = function(busca, quantidade){
+juriSTF.tabela <- function(busca, quantidade) {
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
@@ -58,39 +57,35 @@ juriSTF.tabela = function(busca, quantidade){
 
   # Extração dos dados
   htmlSTF <- httr::POST(
-    'https://jurisprudencia.stf.jus.br/api/search/search',
+    "https://jurisprudencia.stf.jus.br/api/search/search",
     body = stfBusca,
-    encode = 'json',
+    encode = "json",
     httr::add_headers(
-      'User-Agent' = UA
+      "User-Agent" = UA
     )
   )
 
   # Coleta o conteúdo
-  getContent <- jsonlite::fromJSON(httr::content(htmlSTF, 'text'))
+  getContent <- jsonlite::fromJSON(httr::content(htmlSTF, "text"))
 
   # Retorna uma tabela com o conteúdo
   return(getContent$result$hits$hits$`_source`)
-
 }
 
 # Extrair conteúdo grande ----
 
 #' Tabelar o conteúdo grande (+250) da página de jurisprudências do STF
 #'
-#' @param lista
 #' @param busca
 #' @param quantidade
-#' @param UA
 #'
 #' @return
 #' @export
 #'
 #' @examples
-juriSTF.tabela250 = function(busca, quantidade){
-
+juriSTF.tabela250 <- function(busca, quantidade) {
   lista <- list()
-  UA <- 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51'
+  UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   x <- trunc(quantidade / 250)
 
@@ -98,47 +93,43 @@ juriSTF.tabela250 = function(busca, quantidade){
   stfBusca <- jsonlite::read_json(busca)
 
   # Quantidade de registros que vão ser buscados
-  if(quantidade > 250){
+  if (quantidade > 250) {
     quantidade <- 250
   } else {
     quantidade
   }
   stfBusca$size <- quantidade
 
-  for(i in 1:x) {
-
+  for (i in 1:x) {
     stfBusca$from <- (i - 1) * 250
     # Extração dos dados
     htmlSTF <- httr::POST(
-      'https://jurisprudencia.stf.jus.br/api/search/search',
+      "https://jurisprudencia.stf.jus.br/api/search/search",
       body = stfBusca,
-      encode = 'json',
+      encode = "json",
       httr::add_headers(
-        'User-Agent' = UA
+        "User-Agent" = UA
       )
     )
 
     # Coleta o conteudo
-    getContent <- jsonlite::fromJSON(httr::content(htmlSTF, 'text'))
+    getContent <- jsonlite::fromJSON(httr::content(htmlSTF, "text"))
     getTable <- getContent$result$hits$hits$`_source`
 
     lista[[i]] <- getTable
-
   }
 
   # Retorna uma tabela com o conteudo
-  return(bind_rows(lista))
-
+  return(dplyr::bind_rows(lista))
 }
 
 # Baixar decisões ----
 
 #' Baixa as decisões extraídas da página de jurisprudências do STF
 #'
-#'`juriSTF.download` permite baixar as decisões do site de site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
+#' `juriSTF.download` permite baixar as decisões do site de site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
 #'
 #' @param conteudo Objeto `html` que pode ser obtido com a função [juriSTF.conteudo()]
-#' @param UA User-Agent
 #' @param arquivo Local onde será salvo as decisões
 #' @param quantidade Quantidade de decisões que se pretende baixar \(não maior do que as buscadas com a função `juriSTF.conteudo`\). Pode ser colocado um valor referente a posição do conteúdo.
 #'
@@ -146,24 +137,26 @@ juriSTF.tabela250 = function(busca, quantidade){
 #' @export
 #'
 #' @examples
-juriSTF.download = function(conteudo, UA, arquivo, quantidade){
-  for(i in 1:quantidade){
+juriSTF.download <- function(conteudo, arquivo, quantidade) {
+  UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
+
+  for (i in 1:quantidade) {
     getConteudo <- conteudo$result$hits$hits[[i]]$`_source`
     doc <- stringr::str_split_i(
       conteudo$result$hits$hits[[i]]$`_source`$inteiro_teor_url,
-      pattern = '=',
+      pattern = "=",
       -1
     )
     httr::POST(
       paste(
-        'https://redir.stf.jus.br/paginadorpub/paginador.jsp?docTP=TP&docID=',
+        "https://redir.stf.jus.br/paginadorpub/paginador.jsp?docTP=TP&docID=",
         doc,
-        sep = ''
+        sep = ""
       ),
       httr::add_headers(
-        'User-Agent' = UA
+        "User-Agent" = UA
       ),
-      httr::write_disk(paste(arquivo,getConteudo$titulo, '.pdf', sep = ''), T)
+      httr::write_disk(paste(arquivo, getConteudo$titulo, ".pdf", sep = ""), T)
     )
   }
 }

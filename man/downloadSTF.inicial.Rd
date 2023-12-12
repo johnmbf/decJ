@@ -4,7 +4,7 @@
 \alias{downloadSTF.inicial}
 \title{Baixa a petição inicial do processo de controle concentrado}
 \usage{
-downloadSTF.inicial(classe, n, UA, arquivo)
+downloadSTF.inicial(classe, n, arquivo)
 }
 \arguments{
 \item{arquivo}{}
