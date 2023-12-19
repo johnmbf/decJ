@@ -17,7 +17,12 @@ extrairSTF.info(lista, classe, n)
 Uma lista com as datas de ajuizamento e assuntos requeridos.
 }
 \description{
-\code{extrairSTF.info()} permite extrair do site do Supremo Tribunal Federal dados de ajuizamento e assunto dos processos.
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=stf_info]{stf_info()}} no lugar.
 }
 \examples{
 # Extrair os dados da ADPF 800

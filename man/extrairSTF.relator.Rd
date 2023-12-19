@@ -17,7 +17,12 @@ extrairSTF.relator(lista, classe, n)
 Uma lista com os relatores dos processos requeridos.
 }
 \description{
-\code{extrairSTF.relator()} permite extrair do site do Supremo Tribunal Federal dados de relator dos processos.
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=stf_relator]{stf_relator()}} no lugar.
 }
 \examples{
 # Extrair os dados da ADPF 800

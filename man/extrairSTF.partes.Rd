@@ -17,7 +17,11 @@ extrairSTF.partes(lista, classe, n)
 Uma lista com os dados das partes requeridos.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
 Utilize a função \code{\link[=stf_partes]{stf_partes()}} no lugar.
 }
 \examples{

@@ -17,7 +17,12 @@ extrairSTF.decisao(lista, classe, n)
 Uma lista com as decisões dos processos requeridos.
 }
 \description{
-\code{extrairSTF.decisao()} permite extrair do site do Supremo Tribunal Federal dados de decisões dos processos.
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=stf_decisoes]{stf_decisoes()}} no lugar.
 }
 \examples{
 # Extrair os dados da ADPF 800

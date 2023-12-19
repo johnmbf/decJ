@@ -3,7 +3,8 @@
 #' Extrair partes do processo
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
 #' Utilize a função [decJ::stf_partes()] no lugar.
 #'
 #' @param lista Uma lista
@@ -107,7 +108,10 @@ extrairSTF.partes <- function(lista, classe, n) {
 #' Extrair data do protocolo e assunto do processo
 #'
 #' @description
-#' `extrairSTF.info()` permite extrair do site do Supremo Tribunal Federal dados de ajuizamento e assunto dos processos.
+#'
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
+#' Utilize a função [decJ::stf_info()] no lugar.
 #'
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
@@ -127,6 +131,8 @@ extrairSTF.partes <- function(lista, classe, n) {
 #' extrairSTF.info(lista, "ADI", 500:600, UA)
 #' }
 extrairSTF.info <- function(lista, classe, n) {
+  lifecycle::deprecate_stop("19/12/2023", "extrairSTF.info()", "stf_info()")
+
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   print("Extraindo ADPF:")
@@ -210,7 +216,9 @@ extrairSTF.info <- function(lista, classe, n) {
 #' Extrair o relator do processo
 #'
 #' @description
-#' `extrairSTF.relator()` permite extrair do site do Supremo Tribunal Federal dados de relator dos processos.
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
+#' Utilize a função [decJ::stf_relator()] no lugar.
 #'
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
@@ -232,6 +240,8 @@ extrairSTF.info <- function(lista, classe, n) {
 #' extrairSTF.relator(lista, "ADI", 500:600, UA)
 #' }
 extrairSTF.relator <- function(lista, classe, n) {
+  lifecycle::deprecate_stop("19/12/2023", "extrairSTF.relator()", "stf_relator()")
+
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   print("Extraindo ADPF:")
@@ -312,7 +322,9 @@ extrairSTF.relator <- function(lista, classe, n) {
 #' Extrair as decisões do processo
 #'
 #' @description
-#' `extrairSTF.decisao()` permite extrair do site do Supremo Tribunal Federal dados de decisões dos processos.
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
+#' Utilize a função [decJ::stf_decisoes()] no lugar.
 #'
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
@@ -332,6 +344,12 @@ extrairSTF.relator <- function(lista, classe, n) {
 #' extrairSTF.decisao(lista, "ADI", 500:600, UA)
 #' }
 extrairSTF.decisao <- function(lista, classe, n) {
+  lifecycle::deprecate_stop(
+    "19/12/2023",
+    "extrair.STF(decisao)",
+    "stf_decisoes()"
+  )
+
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   print("Extraindo ADPF:")
