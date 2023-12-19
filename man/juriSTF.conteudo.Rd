@@ -15,5 +15,10 @@ juriSTF.conteudo(busca, quantidade)
 Um objeto \code{html} com o conteúdo
 }
 \description{
-\code{juriSTF.conteudo} permite extrair o conteúdo do site de \url{jurisprudência.stf.jus.br}.
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=jurisprudencia_stf]{jurisprudencia_stf()}} no lugar.
 }

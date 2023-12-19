@@ -10,5 +10,10 @@ juriSTF.tabela250(busca, quantidade)
 \item{quantidade}{}
 }
 \description{
-Tabelar o conteúdo grande (+250) da página de jurisprudências do STF
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=jurisprudencia_stf]{jurisprudencia_stf()}} no lugar.
 }

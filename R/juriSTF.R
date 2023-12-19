@@ -2,7 +2,11 @@
 
 #' Pegar o conteúdo da página de jurisprudências do STF
 #'
-#' `juriSTF.conteudo` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br).
+#' @description
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
+#' Utilize a função [decJ::jurisprudencia_stf()] no lugar.
+#'
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
@@ -12,6 +16,11 @@
 #'
 #' @examples
 juriSTF.conteudo <- function(busca, quantidade) {
+  lifecycle::deprecate_stop(
+    "19/12/2023",
+    "juriSTF.conteudo()",
+    "jurisprudencia_stF()"
+  )
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
@@ -36,7 +45,11 @@ juriSTF.conteudo <- function(busca, quantidade) {
 
 #' Tabelar o conteúdo da página de jurisprudências do STF
 #'
-#' `juriSTF.tabela` permite extrair o conteúdo do site de [jurisprudência.stf.jus.br](jurisprudência.stf.jus.br) e devolver em uma tabela.
+#' @description
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+#'
+#' Utilize a função [decJ::jurisprudencia_stf()] no lugar.
+#'
 #'
 #' @param busca Arquivo `.json` com os parâmetros de busca
 #' @param quantidade Número de decisões que devem retornar
@@ -46,6 +59,11 @@ juriSTF.conteudo <- function(busca, quantidade) {
 #'
 #' @examples
 juriSTF.tabela <- function(busca, quantidade) {
+  lifecycle::deprecate_stop(
+    "19/12/2023",
+    "juriSTF.tabela()",
+    "jurisprudencia_stf()"
+  )
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   # Arquivo de busca json
@@ -75,7 +93,10 @@ juriSTF.tabela <- function(busca, quantidade) {
 # Extrair conteúdo grande ----
 
 #' Tabelar o conteúdo grande (+250) da página de jurisprudências do STF
+#' @description
+#' <img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
 #'
+#' Utilize a função [decJ::jurisprudencia_stf()] no lugar.
 #' @param busca
 #' @param quantidade
 #'
@@ -84,6 +105,11 @@ juriSTF.tabela <- function(busca, quantidade) {
 #'
 #' @examples
 juriSTF.tabela250 <- function(busca, quantidade) {
+  lifecycle::deprecate_stop(
+    "19/12/2023",
+    "juriSTF.tabela250()",
+    "jurisprudencia_stf()"
+  )
   lista <- list()
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 

@@ -15,5 +15,10 @@ juriSTF.tabela(busca, quantidade)
 Uma tabela com o conteúdo
 }
 \description{
-\code{juriSTF.tabela} permite extrair o conteúdo do site de \url{jurisprudência.stf.jus.br} e devolver em uma tabela.
+\if{html}{\out{
+<img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg" alt="Deprecated"/>
+}}
+
+
+Utilize a função \code{\link[=jurisprudencia_stf]{jurisprudencia_stf()}} no lugar.
 }
