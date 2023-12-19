@@ -17,7 +17,8 @@ extrairSTF.partes(lista, classe, n)
 Uma lista com os dados das partes requeridos.
 }
 \description{
-\code{extrairSTF.partes()} permite extrair do site do Supremo Tribunal Federal dados das partes dos processos.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Utilize a função \code{\link[=stf_partes]{stf_partes()}} no lugar.
 }
 \examples{
 # Extrair os dados da ADPF 800

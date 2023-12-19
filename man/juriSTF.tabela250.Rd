@@ -7,7 +7,7 @@
 juriSTF.tabela250(busca, quantidade)
 }
 \arguments{
-\item{UA}{}
+\item{quantidade}{}
 }
 \description{
 Tabelar o conteúdo grande (+250) da página de jurisprudências do STF

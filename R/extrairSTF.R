@@ -3,7 +3,8 @@
 #' Extrair partes do processo
 #'
 #' @description
-#' `extrairSTF.partes()` permite extrair do site do Supremo Tribunal Federal dados das partes dos processos.
+#' `r lifecycle::badge("deprecated")`
+#' Utilize a função [decJ::stf_partes()] no lugar.
 #'
 #' @param lista Uma lista
 #' @param classe Um caracter que indica a classe processual
@@ -23,6 +24,8 @@
 #' extrairSTF.partes(lista, "ADI", 500:600, UA)
 #' }
 extrairSTF.partes <- function(lista, classe, n) {
+  lifecycle::deprecate_stop("18/12/2023", "extrairSTF.partes()", "stf_partes()")
+
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
   print("Extraindo ADPF:")
