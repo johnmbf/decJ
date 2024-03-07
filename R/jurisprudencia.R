@@ -22,11 +22,20 @@
 #' dados
 #'
 #' @export
-jurisprudencia_stf = function(busca = " ", base = c("acordaos", "decisoes"), quantidade = 25){
+jurisprudencia_stf = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
-  body <- decJ::busca_jurisprudencia
-  body$query$bool$filter[[1]]$query_string$query <- busca
-  body$post_filter$bool$must[[1]]$term$base <- base
+
+  if (!is.null(busca) & is.null(classe)) {
+    body <- decJ::busca_jurisprudencia
+    body$query$bool$filter[[1]]$query_string$query <- busca
+    body$post_filter$bool$must[[1]]$term$base <- base
+  } else if (is.null(busca) & !is.null(classe)) {
+    body <- decJ::busca_classe
+    body$query$bool$filter$query_string$query <- classe
+    body$post_filter$bool$must$term$base <- base
+  } else if ((!is.null(busca) & !is.null(classe))) {
+    stop("Essa função só funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+  }
 
   num_iteracoes <- ceiling(quantidade / 250)
 

@@ -33,6 +33,7 @@ stf_ = function(){
 }
 
 #' @rdname stf_
+#' @export
 stf_partes = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -68,6 +69,7 @@ stf_partes = function(classe, processo){
 }
 
 #' @rdname stf_
+#' @export
 stf_info = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -110,6 +112,7 @@ stf_info = function(classe, processo){
 }
 
 #' @rdname stf_
+#' @export
 stf_relator = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -147,6 +150,7 @@ stf_relator = function(classe, processo){
 }
 
 #' @rdname stf_
+#' @export
 stf_decisoes = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")

@@ -77,8 +77,18 @@
 #'
 #' Objeto do tipo `characeter` que contém nome das partes de processos de controle concentrado para serem uniformizadas. Para uniformizar é só utilizar a função da seguinte forma: `[COLUNA/TEXTO QUE SERÁ ALTERADO] |>stringr::str_replace_all(decJ::lista_partes)`
 #'
-#' @format ## `lista_partes`
+#' @format ## `Busca Juisprudencia com base em palavras chaves`
 #' Um character com 842 elementos
 #'
 #' @source Elaborado por Jonathan Ferreira
 "busca_jurisprudencia"
+
+#' Lista para uniformização do nome das partes
+#'
+#' Objeto do tipo `characeter` que contém nome das partes de processos de controle concentrado para serem uniformizadas. Para uniformizar é só utilizar a função da seguinte forma: `[COLUNA/TEXTO QUE SERÁ ALTERADO] |>stringr::str_replace_all(decJ::lista_partes)`
+#'
+#' @format ## `Busca Classe`
+#' Um character com 842 elementos
+#'
+#' @source Elaborado por Jonathan Ferreira
+"busca_classe"
