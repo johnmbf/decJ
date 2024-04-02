@@ -1,5 +1,5 @@
 Package: decJ
-Title: Auxílio em pesquisas com processos no Supremo Tribunal Federal
+Title: Auxílio em pesquisas com processos judiciais
 Version: 0.0.0.9000
 Authors@R: c(
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
@@ -29,3 +29,6 @@ Imports:
 Depends: 
     R (>= 3.5.0)
 LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

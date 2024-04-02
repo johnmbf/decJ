@@ -13,6 +13,7 @@
 #'     \item{Tipo}{O tipo da parte (por exemplo, "Autor", "Réu", "Interessado", etc.).}
 #'     \item{Parte}{O nome da parte envolvida no processo.}
 #'   }
+#' @seealso [stf_info()] [stf_decisoes()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
@@ -55,9 +56,6 @@ stf_partes <- function(classe, processo){
   }, NULL), rate = purrr::rate_delay(5)), .progress = list(type = 'tasks'))
 }
 
-
-#' @rdname stf_
-#' @export
 #' Extrai informações sobre um processo judicial no STF
 #'
 #' Esta função extrai informações sobre um processo judicial no Supremo Tribunal Federal (STF)
@@ -73,6 +71,7 @@ stf_partes <- function(classe, processo){
 #'     \item{Ajuizamento}{A data do protocolo (ajuizamento) do processo.}
 #'     \item{Assunto}{O assunto do processo.}
 #'   }
+#' @seealso [stf_partes()] [stf_decisoes()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
@@ -135,6 +134,7 @@ stf_info <- function(classe, processo){
 #'     \item{Classe}{A classe do processo.}
 #'     \item{Relator}{O nome do relator do processo.}
 #'   }
+#' @seealso [stf_partes()] [stf_info()] [stf_decisoes]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
@@ -195,6 +195,7 @@ stf_relator = function(classe, processo){
 #'     \item{Julgador}{O julgador responsável pela decisão.}
 #'     \item{Decisao}{O conteúdo da decisão.}
 #'   }
+#' @seealso [stf_partes()] [stf_info()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
@@ -353,6 +354,7 @@ stf_inicial <- function(classe, n, arquivo) {
 #' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
 #' @param quantidade O número de resultados desejados. O padrão é 25.
 #' @return Um \code{data.frame} contendo as informações da jurisprudência encontrada.
+#' @seealso [stf_jurisprudencia_download()]
 #' @import httr
 #' @importFrom jsonlite fromJSON
 #' @export
@@ -411,6 +413,7 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
 #' @param quantidade O número de documentos a serem baixados. O padrão é 25.
 #' @param arquivo O diretório onde os arquivos serão salvos. O padrão é o diretório atual.
+#' @seealso [stf_jurisprudencia()]
 #' @import httr
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr walk slowly rate_delay
