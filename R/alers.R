@@ -103,12 +103,3 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   return(df)
 
 }
-
-leis <- data.frame(
-  lei = c(10098:10150),
-  ano = c(1994)
-)
-
-a <- purrr::map2_df(leis$lei, leis$ano, ~{
-  alers_projeto(.x, .y, .reportar = FALSE)
-}, .progress = TRUE)
