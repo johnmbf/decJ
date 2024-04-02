@@ -2,19 +2,26 @@
 % Please edit documentation in R/oasis.R
 \name{oasis}
 \alias{oasis}
-\title{Oasis}
+\title{Realiza uma pesquisa no OASIS e retorna os resultados}
 \usage{
-oasis(pesquisa)
+oasis(pesquisa, rayyan = FALSE)
 }
 \arguments{
-\item{pesquisa}{\code{String} - os descritores da pesquisa. Ver exemplos.}
+\item{pesquisa}{A string contendo o termo de pesquisa a ser usado no OASIS.}
+
+\item{rayyan}{Um valor lógico indicando se os resultados devem ser formatados para uso com a ferramenta Rayyan. O padrão é FALSE.}
 }
 \value{
-Um \code{tibble}
+Um data frame contendo os metadados dos registros encontrados.
 }
 \description{
-Extrai dados do repositório Oasisbr e retorna um tibble
+Esta função realiza uma pesquisa no OASIS utilizando a API e retorna os resultados encontrados.
+Ela extrai os metadados dos registros encontrados, como título, autores, resumo, palavras-chave, data de publicação, notas e URL.
 }
-\details{
-Por enquanto o único parâmetro que pode ser alteardo é a busca. Estou estudando a alteração dos demais campos de pesquisa.
+\examples{
+# Realizar pesquisa no OASIS e obter os resultados
+oasis("direitos humanos")
+
+# Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
+oasis("direitos humanos", rayyan = TRUE)
 }

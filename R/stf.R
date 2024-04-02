@@ -1,40 +1,27 @@
-#' Extrair dados de processos do Supremo Tribunal Federal
+#' Extrai informações sobre as partes de processos judiciais no STF
 #'
-#'@description
-#' Quatro funções que permitem extrair diferentes dados de processos no Supremo Tribunal Federal.
+#' Esta função extrai informações sobre as partes de processos judiciais no Supremo Tribunal Federal (STF)
+#' utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
+#' e retorna um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
 #'
-#' [stf_partes()]: Extrair as partes dos processos
-#'
-#' [stf_info()]: Extrair data de ajuizamento e assuntos do processo
-#'
-#' [stf_relator()]: Extrair o relator do processo
-#'
-#' [stf_decisoes()]: Extrair as decisões tomadas no processo
-#'
-#' @param classe Classe processual. Por exemplo: "ADPF" ou "ADI". Usar abreviatura da classe. Se tiver em dúvida, consultar o site do Supremo.
-#' @param processo Número dos processos que pretende solicitar. Por exemplo: 500:600 (do 500 ao 600), ou list(500,600,700) que vai buscar o processo 500, 600 e 700
-#'
-#' @return Data frame
-#'
+#' @param classe A classe do processo, em maiúsculas. Por exemplo, "RE", "HC", "ADI", etc.
+#' @param processo O número do processo ou uma lista de números de processo.
+#' @return Um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
+#'   O \code{data.frame} contém as seguintes colunas:
+#'   \describe{
+#'     \item{Classe}{A classe do processo.}
+#'     \item{Tipo}{O tipo da parte (por exemplo, "Autor", "Réu", "Interessado", etc.).}
+#'     \item{Parte}{O nome da parte envolvida no processo.}
+#'   }
+#' @import httr
+#' @importFrom xml2 xml_find_all xml_text
+#' @importFrom purrr map_dfr slowly possibly rate_delay
+#' @importFrom stringr str_split_i
+#' @export
 #' @examples
-#' # Retorna 1 processo
-#' tabela_partes <- stf_partes("ADPF", 500)
-#'
-#' # Retorna uma sequência de processos
-#' tabela_partes <- stf_partes("ADI", 1500:1505)
-#'
-#' # Retorna um conjunto de processos
-#' tabela_partes <- stf_partes("ADO", c(10,15,20))
-#'
-#' @export
-stf_ = function(){
-  message("Conjunto de funções para extrair dados de processos do Supremo Tribunal Federal")
-  help(stf_)
-}
-
-#' @rdname stf_
-#' @export
-stf_partes = function(classe, processo){
+#' stf_partes("RE", "12345/2023")
+#' stf_partes("ADI", c("54321/2022", "67890/2021"))
+stf_partes <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
 
@@ -68,9 +55,33 @@ stf_partes = function(classe, processo){
   }, NULL), rate = purrr::rate_delay(5)), .progress = list(type = 'tasks'))
 }
 
+
 #' @rdname stf_
 #' @export
-stf_info = function(classe, processo){
+#' Extrai informações sobre um processo judicial no STF
+#'
+#' Esta função extrai informações sobre um processo judicial no Supremo Tribunal Federal (STF)
+#' utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
+#' e retorna um \code{data.frame} contendo informações sobre o processo, incluindo a data do protocolo
+#' (ajuizamento) e o assunto do processo.
+#'
+#' @param classe A classe do processo, em maiúsculas. Por exemplo, "RE", "HC", "ADI", etc.
+#' @param processo O número do processo ou uma lista de números de processo.
+#' @return Um \code{data.frame} contendo informações sobre o processo, incluindo as seguintes colunas:
+#'   \describe{
+#'     \item{Classe}{A classe do processo.}
+#'     \item{Ajuizamento}{A data do protocolo (ajuizamento) do processo.}
+#'     \item{Assunto}{O assunto do processo.}
+#'   }
+#' @import httr
+#' @importFrom xml2 xml_find_all xml_text
+#' @importFrom purrr map_dfr slowly possibly rate_delay
+#' @importFrom stringr str_split_i
+#' @export
+#' @examples
+#' stf_info("RE", "12345/2023")
+#' stf_info("ADI", c("54321/2022", "67890/2021"))
+stf_info <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
 
@@ -111,8 +122,27 @@ stf_info = function(classe, processo){
 
 }
 
-#' @rdname stf_
+#' Extrai informações sobre o relator de um processo judicial no STF
+#'
+#' Esta função extrai informações sobre o relator de um processo judicial no Supremo Tribunal Federal (STF)
+#' utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
+#' e retorna um \code{data.frame} contendo informações sobre o relator do processo.
+#'
+#' @param classe A classe do processo, em maiúsculas. Por exemplo, "RE", "HC", "ADI", etc.
+#' @param processo O número do processo ou uma lista de números de processo.
+#' @return Um \code{data.frame} contendo informações sobre o relator do processo, incluindo as seguintes colunas:
+#'   \describe{
+#'     \item{Classe}{A classe do processo.}
+#'     \item{Relator}{O nome do relator do processo.}
+#'   }
+#' @import httr
+#' @importFrom xml2 xml_find_all xml_text
+#' @importFrom purrr map_dfr slowly possibly rate_delay
+#' @importFrom stringr str_split_i str_trim
 #' @export
+#' @examples
+#' stf_relator("RE", "12345/2023")
+#' stf_relator("ADI", c("54321/2022", "67890/2021"))
 stf_relator = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -149,8 +179,30 @@ stf_relator = function(classe, processo){
 
 }
 
-#' @rdname stf_
+#' Extrai informações sobre as decisões de um processo judicial no STF
+#'
+#' Esta função extrai informações sobre as decisões de um processo judicial no Supremo Tribunal Federal (STF)
+#' utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
+#' e retorna um \code{data.frame} contendo informações sobre as decisões do processo.
+#'
+#' @param classe A classe do processo, em maiúsculas. Por exemplo, "RE", "HC", "ADI", etc.
+#' @param processo O número do processo ou uma lista de números de processo.
+#' @return Um \code{data.frame} contendo informações sobre as decisões do processo, incluindo as seguintes colunas:
+#'   \describe{
+#'     \item{Classe}{A classe do processo.}
+#'     \item{Data}{A data da decisão.}
+#'     \item{Nome}{O nome da decisão.}
+#'     \item{Julgador}{O julgador responsável pela decisão.}
+#'     \item{Decisao}{O conteúdo da decisão.}
+#'   }
+#' @import httr
+#' @importFrom xml2 xml_find_all xml_text
+#' @importFrom purrr map_dfr slowly possibly rate_delay
+#' @importFrom stringr str_split_i
 #' @export
+#' @examples
+#' stf_decisoes("RE", "12345/2023")
+#' stf_decisoes("ADI", c("54321/2022", "67890/2021"))
 stf_decisoes = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -211,4 +263,191 @@ stf_decisoes = function(classe, processo){
 
   }, NULL), rate = purrr::rate_delay(5)), .progress = list(type = 'tasks'))
 
+}
+
+#' Baixa a petição inicial de processos do STF
+#'
+#' Esta função permite baixar a petição inicial de processos do Supremo Tribunal Federal (STF) com base nos parâmetros fornecidos.
+#'
+#' @param classe A classe do processo.
+#' @param n Um vetor contendo os números dos processos.
+#' @param arquivo O diretório onde os arquivos serão salvos.
+#' @return Esta função não retorna nada explicitamente. Ela salva os arquivos PDF da petição inicial dos processos no diretório especificado.
+#' @import httr
+#' @importFrom stringr str_split_i
+#' @importFrom rvest html_element
+#' @importFrom xml2 xml_attr
+#' @export
+#' @examples
+#' # Baixar a petição inicial do processo com número 12345 da classe "RE"
+#' downloadSTF.inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+stf_inicial <- function(classe, n, arquivo) {
+
+  UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
+
+  for (i in n) { ## faça isso em cada processo ##
+
+    # Busque no site o processo
+    getProcesso <- httr::GET(
+      paste(
+        "https://portal.stf.jus.br/processos/listarProcessos.asp?classe=",
+        classe,
+        "&numeroProcesso=",
+        i,
+        sep = ""
+      ),
+      httr::add_headers(
+        "User-Agent" = UA
+      )
+    )
+
+    # Salve o incidente
+    getIncidente <- stringr::str_split_i(
+      getProcesso$url,
+      pattern = "=",
+      -1
+    )
+
+    # Consulta o processo eletrônico
+    getProcesso <- httr::GET(
+      paste("https://redir.stf.jus.br/estfvisualizadorpub/jsp/consultarprocessoeletronico/ConsultarProcessoEletronico.jsf?seqobjetoincidente=",
+            getIncidente,
+            sep = ""
+      ),
+      httr::add_headers(
+        "User-Agent" = UA
+      )
+    )
+
+    # Leia o conteúdo do processo
+    getConteudo <- httr::content(getProcesso, encoding = "UTF-8")
+
+    # Busca a petição inicial
+    getInicial <- getConteudo |>
+      rvest::html_element("a")
+
+    getInicial <- xml2::xml_attr(getInicial, "href")
+
+    # Salva o arquivo
+    httr::GET(
+      getInicial,
+      httr::add_headers(
+        "User-Agent" = UA
+      ),
+      httr::write_disk(paste(arquivo, i, "_inicial", ".pdf", sep = ""), T)
+    )
+
+    # Aguarde 5 segundos
+    date_time <- Sys.time()
+    while ((as.numeric(Sys.time()) - as.numeric(date_time)) < 5) {}
+  }
+}
+
+#' Extrai jurisprudência do Supremo Tribunal Federal (STF)
+#'
+#' Esta função extrai jurisprudência do Supremo Tribunal Federal (STF) utilizando a API do portal de jurisprudência STF.
+#' Você pode pesquisar por palavras-chave ou por classe de processo.
+#'
+#' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
+#' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
+#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
+#' @param quantidade O número de resultados desejados. O padrão é 25.
+#' @return Um \code{data.frame} contendo as informações da jurisprudência encontrada.
+#' @import httr
+#' @importFrom jsonlite fromJSON
+#' @export
+#' @examples
+#' # Buscar jurisprudência por palavras-chave
+#' stf_jurisprudencia(busca = "direitos humanos", quantidade = 10)
+#'
+#' # Buscar jurisprudência por classe de processo
+#' stf_jurisprudencia(classe = "ADI", quantidade = 10)
+#'
+#' # Buscar jurisprudência por classe de processo com base específica
+#' stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
+stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
+  header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
+
+  if (!is.null(busca) & is.null(classe)) {
+    body <- decJ::busca_jurisprudencia
+    body$query$bool$filter[[1]]$query_string$query <- busca
+    body$post_filter$bool$must[[1]]$term$base <- base
+  } else if (is.null(busca) & !is.null(classe)) {
+    body <- decJ::busca_classe
+    body$query$bool$filter$query_string$query <- classe
+    body$post_filter$bool$must$term$base <- base
+  } else if ((!is.null(busca) & !is.null(classe))) {
+    stop("Essa função só funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+  }
+
+  num_iteracoes <- ceiling(quantidade / 250)
+
+  if (quantidade > 250) {
+    body$size <- 250
+  } else {
+    body$size <- quantidade
+  }
+
+  purrr::map_dfr(1:num_iteracoes, ~{
+    body$from <- (.x - 1) * 250
+    htmlSTF <- httr::POST(
+      "https://jurisprudencia.stf.jus.br/api/search/search",
+      body = body,
+      encode = "json", header
+    )
+    getContent <- jsonlite::fromJSON(httr::content(htmlSTF, "text"))
+    dados <- getContent$result$hits$hits$`_source`
+  })
+}
+
+#' Baixa jurisprudência do Supremo Tribunal Federal (STF)
+#'
+#' Esta função baixa jurisprudência do Supremo Tribunal Federal (STF) utilizando a API do portal de jurisprudência STF.
+#' Você pode pesquisar por palavras-chave ou por classe de processo e especificar a quantidade de documentos a serem baixados.
+#' Os documentos são salvos como arquivos PDF.
+#'
+#' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
+#' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
+#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
+#' @param quantidade O número de documentos a serem baixados. O padrão é 25.
+#' @param arquivo O diretório onde os arquivos serão salvos. O padrão é o diretório atual.
+#' @import httr
+#' @importFrom jsonlite fromJSON
+#' @importFrom purrr walk slowly rate_delay
+#' @importFrom stringr str_split_i
+#' @export
+#' @examples
+#' # Baixar jurisprudência por palavras-chave
+#' stf_jurisprudencia_download(busca = "direitos humanos", quantidade = 10, arquivo = "~/Downloads/")
+#'
+#' # Baixar jurisprudência por classe de processo
+#' stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downloads/")
+#'
+#' # Baixar jurisprudência por classe de processo com base específica
+#' stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+stf_jurisprudencia_download = function(busca = " ", base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
+  header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
+  body <- decJ::busca_jurisprudencia
+  body$query$bool$filter[[1]]$query_string$query <- busca
+  body$post_filter$bool$must[[1]]$term$base <- base
+
+  num_iteracoes <- ceiling(quantidade / 250)
+
+  if (quantidade > 250) {
+    body$size <- 250
+  } else {
+    body$size <- quantidade
+  }
+
+  purrr::walk(1:num_iteracoes, ~{
+    body$from <- (.x - 1) * 250
+    htmlSTF <- httr::POST("https://jurisprudencia.stf.jus.br/api/search/search", body = body, encode = "json", header)
+    getContent <- jsonlite::fromJSON(httr::content(htmlSTF, "text"))
+    conteudo <- getContent$result$hits$hits$`_source`
+
+    purrr::walk(1:quantidade, purrr::slowly(~{
+      doc <- stringr::str_split_i(conteudo$inteiro_teor_url[.x],pattern = "=", -1)
+      httr::POST(paste0("https://redir.stf.jus.br/paginadorpub/paginador.jsp?docTP=TP&docID=",doc), header,httr::write_disk(paste0(arquivo, conteudo$id[.x], ".pdf"), T))
+    }, rate = purrr::rate_delay(5)), .progress = list(type = 'tasks'))
+  })
 }
