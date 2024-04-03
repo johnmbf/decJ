@@ -30,3 +30,23 @@ devtools::install_github("johnmbf/decJ")
 ## Tutorial
 
 … já já
+
+## Referência
+
+Para citar o pacote decJ em publicações, utilize:
+
+FERREIRA, Jonathan Morais Barcellos. decJ: Auxílio em pesquisas com
+processos e decisões judiciais. Versão 1.0.0. Rio Grande, 2023.
+Disponível em: <doi:10.5281/zenodo.10910047>.
+
+Se preferir, em bibTex, utilize:
+
+``` bibtex
+@software{,
+    title = {decJ: Auxílio em pesquisas com processos e decisões judiciais},
+    author = {Jonathan Morais Barcellos Ferreira},
+    year = {2023},
+    version = {1.0.0},
+    doi = {10.5281/zenodo.10910047},
+  }
+```
