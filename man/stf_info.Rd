@@ -29,3 +29,6 @@ e retorna um \code{data.frame} contendo informações sobre o processo, incluind
 stf_info("RE", "12345/2023")
 stf_info("ADI", c("54321/2022", "67890/2021"))
 }
+\seealso{
+\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_decisoes]{stf_decisoes()}} \code{\link[=stf_relator]{stf_relator()}}
+}

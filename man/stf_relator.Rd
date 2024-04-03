@@ -27,3 +27,6 @@ e retorna um \code{data.frame} contendo informações sobre o relator do process
 stf_relator("RE", "12345/2023")
 stf_relator("ADI", c("54321/2022", "67890/2021"))
 }
+\seealso{
+\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_info]{stf_info()}} \link{stf_decisoes}
+}

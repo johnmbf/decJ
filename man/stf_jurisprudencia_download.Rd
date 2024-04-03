@@ -37,3 +37,6 @@ stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downlo
 # Baixar jurisprudência por classe de processo com base específica
 stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
 }
+\seealso{
+\code{\link[=stf_jurisprudencia]{stf_jurisprudencia()}}
+}

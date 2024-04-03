@@ -1,0 +1,21 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  decJ: Auxílio em pesquisas com processos e decisões
+  judiciais
+message: 'Por favor, se usar o decJ, cite!'
+type: software
+authors:
+  - given-names: Jonathan Morais Barcellos
+    family-names: Ferreira
+    email: joathanmbferreira@outlook.com
+    affiliation: Universidade Federal do Rio Grande
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.10910047
+repository-code: 'https://github.com/johnmbf/decJ'
+license: CC-BY-4.0
+version: 1.0.0
+date-released: '2024-04-02'

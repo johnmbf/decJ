@@ -37,3 +37,6 @@ stf_jurisprudencia(classe = "ADI", quantidade = 10)
 # Buscar jurisprudência por classe de processo com base específica
 stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
 }
+\seealso{
+\code{\link[=stf_jurisprudencia_download]{stf_jurisprudencia_download()}}
+}

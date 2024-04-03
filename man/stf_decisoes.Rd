@@ -30,3 +30,6 @@ e retorna um \code{data.frame} contendo informações sobre as decisões do proc
 stf_decisoes("RE", "12345/2023")
 stf_decisoes("ADI", c("54321/2022", "67890/2021"))
 }
+\seealso{
+\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_info]{stf_info()}} \code{\link[=stf_relator]{stf_relator()}}
+}

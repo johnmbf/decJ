@@ -1,10 +1,11 @@
 Package: decJ
-Title: Auxílio em pesquisas com processos judiciais
+Title: Auxílio em pesquisas com processos e decisões judiciais
 Version: 1.0.0
 Authors@R: c(
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9946-2173")),
     person("Gabriel", "Simões", role = "ctb"))
+Year: 2023
 Description: O pacote possui um conjunto de funções para auxiliar em pesquisas que tenham como objeto decisões do Supremo Tribunal Federal, permitindo coletar e manipular dados do tribunal.
 License: CC BY 4.0
 Encoding: UTF-8
