@@ -30,25 +30,3 @@ devtools::install_github("johnmbf/decJ")
 ## Tutorial
 
 … já já
-
-## Referência
-
-Para citar o pacote decJ em publicações, utilize:
-
-    #> To cite package 'decJ' in publications use:
-    #> 
-    #>   Ferreira JMB (2023). "DecJ: Auxílio em pesquisas com processos e
-    #>   decisões judiciais." doi:10.5281/zenodo.10910047
-    #>   <https://doi.org/10.5281/zenodo.10910047>, R Package Version 1.0.0,
-    #>   <https://github.com/johnmbf/decJ>.
-    #> 
-    #> A BibTeX entry for LaTeX users is
-    #> 
-    #>   @Unpublished{,
-    #>     title = {DecJ: Auxílio em pesquisas com processos e decisões judiciais},
-    #>     author = {Jonathan Morais Barcellos Ferreira},
-    #>     year = {2023},
-    #>     note = {R Package Version 1.0.0},
-    #>     url = {https://github.com/johnmbf/decJ},
-    #>     doi = {10.5281/zenodo.10910047},
-    #>   }

@@ -41,12 +41,3 @@ devtools::install_github("johnmbf/decJ")
 
 ... já já 
 
-## Referência
-
-Para citar o pacote decJ em publicações, utilize:
-
-```{r, echo = FALSE}
-citation('decJ')
-```
-
-
