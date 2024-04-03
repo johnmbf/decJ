@@ -1,0 +1,7 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "decJ: Auxílio em pesquisas com processos e decisões judiciais",
+  author   = "Jonathan Morais Barcellos Ferreira",
+  year     = "2023",
+  doi      = "10.5281/zenodo.10910047"
+)
