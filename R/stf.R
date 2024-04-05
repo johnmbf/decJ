@@ -378,7 +378,7 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
 
   if (!is.null(busca) & is.null(classe)) {
-    body <- decJ::busca_jurisprudencia
+    body <- busca_jurisprudencia
     body$query$bool$filter[[1]]$query_string$query <- busca
     body$post_filter$bool$must[[1]]$term$base <- base
   } else if (is.null(busca) & !is.null(classe)) {
@@ -444,7 +444,7 @@ stf_jurisprudencia_download = function(busca = " ", base = c("acordaos", "deciso
   }
 
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
-  body <- decJ::busca_jurisprudencia
+  body <- busca_jurisprudencia
   body$query$bool$filter[[1]]$query_string$query <- busca
   body$post_filter$bool$must[[1]]$term$base <- base
 
