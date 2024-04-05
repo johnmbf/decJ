@@ -1,6 +1,6 @@
 Package: decJ
 Title: Auxílio em pesquisas com processos e decisões judiciais
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: c(
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9946-2173")),
