@@ -26,9 +26,17 @@ e retorna um \code{data.frame} contendo informações sobre o processo, incluind
 (ajuizamento) e o assunto do processo.
 }
 \examples{
-stf_info("RE", "12345/2023")
-stf_info("ADI", c("54321/2022", "67890/2021"))
+stf_info("RE", "12345")
+stf_info("ADI", c("54321", "67890"))
+
 }
 \seealso{
-\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_decisoes]{stf_decisoes()}} \code{\link[=stf_relator]{stf_relator()}}
+Other stf: 
+\code{\link{stf_decisoes}()},
+\code{\link{stf_inicial}()},
+\code{\link{stf_jurisprudencia_download}()},
+\code{\link{stf_jurisprudencia}()},
+\code{\link{stf_partes}()},
+\code{\link{stf_relator}()}
 }
+\concept{stf}

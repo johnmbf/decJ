@@ -28,5 +28,5 @@ Esta função permite buscar jurisprudência no Portal de Jurisprudência do Tri
 }
 \examples{
 # Buscar jurisprudência com base na classe processual
-tjrs_jurisprudencia(classe = "Apelação Cível", julgamento_inicial = "01/01/2023", julgamento_final = "31/12/2023")
+tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/02/2023")
 }

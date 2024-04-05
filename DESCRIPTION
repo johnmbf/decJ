@@ -5,7 +5,7 @@ Authors@R: c(
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9946-2173")),
     person("Gabriel", "Simões", role = "ctb"))
-Year: 2023
+Date: 2024-04-02
 Description: O pacote possui um conjunto de funções para auxiliar em pesquisas que tenham como objeto decisões do Supremo Tribunal Federal, permitindo coletar e manipular dados do tribunal.
 License: CC BY 4.0
 Encoding: UTF-8
@@ -30,6 +30,3 @@ Imports:
 Depends: 
     R (>= 3.5.0)
 LazyData: true
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3

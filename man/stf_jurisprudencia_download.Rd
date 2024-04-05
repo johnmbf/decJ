@@ -14,7 +14,7 @@ stf_jurisprudencia_download(
 \arguments{
 \item{busca}{Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.}
 
-\item{base}{Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.}
+\item{base}{Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".}
 
 \item{quantidade}{O número de documentos a serem baixados. O padrão é 25.}
 
@@ -29,14 +29,22 @@ Os documentos são salvos como arquivos PDF.
 }
 \examples{
 # Baixar jurisprudência por palavras-chave
-stf_jurisprudencia_download(busca = "direitos humanos", quantidade = 10, arquivo = "~/Downloads/")
+stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
 
 # Baixar jurisprudência por classe de processo
 stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downloads/")
 
 # Baixar jurisprudência por classe de processo com base específica
 stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+
 }
 \seealso{
-\code{\link[=stf_jurisprudencia]{stf_jurisprudencia()}}
+Other stf: 
+\code{\link{stf_decisoes}()},
+\code{\link{stf_info}()},
+\code{\link{stf_inicial}()},
+\code{\link{stf_jurisprudencia}()},
+\code{\link{stf_partes}()},
+\code{\link{stf_relator}()}
 }
+\concept{stf}

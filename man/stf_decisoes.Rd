@@ -27,9 +27,17 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre as decisões do processo.
 }
 \examples{
-stf_decisoes("RE", "12345/2023")
-stf_decisoes("ADI", c("54321/2022", "67890/2021"))
+stf_decisoes("RE", "12345")
+stf_decisoes("ADI", c("54321", "67890"))
+
 }
 \seealso{
-\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_info]{stf_info()}} \code{\link[=stf_relator]{stf_relator()}}
+Other stf: 
+\code{\link{stf_info}()},
+\code{\link{stf_inicial}()},
+\code{\link{stf_jurisprudencia_download}()},
+\code{\link{stf_jurisprudencia}()},
+\code{\link{stf_partes}()},
+\code{\link{stf_relator}()}
 }
+\concept{stf}

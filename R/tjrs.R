@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' # Buscar jurisprudência com base na classe processual
-#' tjrs_jurisprudencia(classe = "Apelação Cível", julgamento_inicial = "01/01/2023", julgamento_final = "31/12/2023")
+#' tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/02/2023")
 tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_final = "", .reportar = TRUE) {
   url <- "https://www.tjrs.jus.br/buscas/jurisprudencia/ajax.php"
 

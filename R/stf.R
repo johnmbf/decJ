@@ -13,15 +13,16 @@
 #'     \item{Tipo}{O tipo da parte (por exemplo, "Autor", "Réu", "Interessado", etc.).}
 #'     \item{Parte}{O nome da parte envolvida no processo.}
 #'   }
-#' @seealso [stf_info()] [stf_decisoes()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_partes("RE", "12345/2023")
-#' stf_partes("ADI", c("54321/2022", "67890/2021"))
+#' stf_partes("RE", "12345")
+#' stf_partes("ADI", c("54321", "67890"))
+#'
+#' @family stf
 stf_partes <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -71,15 +72,16 @@ stf_partes <- function(classe, processo){
 #'     \item{Ajuizamento}{A data do protocolo (ajuizamento) do processo.}
 #'     \item{Assunto}{O assunto do processo.}
 #'   }
-#' @seealso [stf_partes()] [stf_decisoes()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_info("RE", "12345/2023")
-#' stf_info("ADI", c("54321/2022", "67890/2021"))
+#' stf_info("RE", "12345")
+#' stf_info("ADI", c("54321", "67890"))
+#'
+#' @family stf
 stf_info <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -134,15 +136,16 @@ stf_info <- function(classe, processo){
 #'     \item{Classe}{A classe do processo.}
 #'     \item{Relator}{O nome do relator do processo.}
 #'   }
-#' @seealso [stf_partes()] [stf_info()] [stf_decisoes]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
 #' @importFrom stringr str_split_i str_trim
 #' @export
 #' @examples
-#' stf_relator("RE", "12345/2023")
-#' stf_relator("ADI", c("54321/2022", "67890/2021"))
+#' stf_relator("RE", "12345")
+#' stf_relator("ADI", c("54321", "67890"))
+#'
+#' @family stf
 stf_relator = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -195,15 +198,16 @@ stf_relator = function(classe, processo){
 #'     \item{Julgador}{O julgador responsável pela decisão.}
 #'     \item{Decisao}{O conteúdo da decisão.}
 #'   }
-#' @seealso [stf_partes()] [stf_info()] [stf_relator()]
 #' @import httr
 #' @importFrom xml2 xml_find_all xml_text
 #' @importFrom purrr map_dfr slowly possibly rate_delay
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_decisoes("RE", "12345/2023")
-#' stf_decisoes("ADI", c("54321/2022", "67890/2021"))
+#' stf_decisoes("RE", "12345")
+#' stf_decisoes("ADI", c("54321", "67890"))
+#'
+#' @family stf
 stf_decisoes = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -281,7 +285,9 @@ stf_decisoes = function(classe, processo){
 #' @export
 #' @examples
 #' # Baixar a petição inicial do processo com número 12345 da classe "RE"
-#' downloadSTF.inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+#' stf_inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+#'
+#' @family stf
 stf_inicial <- function(classe, n, arquivo) {
 
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
@@ -351,10 +357,9 @@ stf_inicial <- function(classe, n, arquivo) {
 #'
 #' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
 #' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
-#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
+#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".
 #' @param quantidade O número de resultados desejados. O padrão é 25.
 #' @return Um \code{data.frame} contendo as informações da jurisprudência encontrada.
-#' @seealso [stf_jurisprudencia_download()]
 #' @import httr
 #' @importFrom jsonlite fromJSON
 #' @export
@@ -367,6 +372,8 @@ stf_inicial <- function(classe, n, arquivo) {
 #'
 #' # Buscar jurisprudência por classe de processo com base específica
 #' stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
+#'
+#' @family stf
 stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
 
@@ -410,10 +417,9 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #'
 #' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
 #' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
-#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.
+#' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".
 #' @param quantidade O número de documentos a serem baixados. O padrão é 25.
 #' @param arquivo O diretório onde os arquivos serão salvos. O padrão é o diretório atual.
-#' @seealso [stf_jurisprudencia()]
 #' @import httr
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr walk slowly rate_delay
@@ -421,14 +427,22 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' @export
 #' @examples
 #' # Baixar jurisprudência por palavras-chave
-#' stf_jurisprudencia_download(busca = "direitos humanos", quantidade = 10, arquivo = "~/Downloads/")
+#' stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
 #'
 #' # Baixar jurisprudência por classe de processo
 #' stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downloads/")
 #'
 #' # Baixar jurisprudência por classe de processo com base específica
 #' stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+#'
+#' @family stf
 stf_jurisprudencia_download = function(busca = " ", base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
+
+  if (length(base) != 1){
+    cat("Você deve selecionar apenenas uma base, de acórdãos OU de decisões (monocráticas)")
+    return(NULL)
+  }
+
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
   body <- decJ::busca_jurisprudencia
   body$query$bool$filter[[1]]$query_string$query <- busca

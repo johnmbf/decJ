@@ -1,19 +1,24 @@
-#' Cria um dicionário de expressões a partir de ngrams
+#' Cria um dicionário de termos a partir de tokens
 #'
-#' @description
-#' `dicionario.Criar()` cria um dicionário de expressões usando ngrams do pacote `quanteda`
-#' Esse dicionário pode ser aplicado depois com a função [quanteda::tokens_compound()], permitindo unir palavras que possuem um únicos significado quando em conjunto.
+#' Esta função cria um dicionário de termos a partir de tokens, onde os termos são
+#' gerados a partir de n-gramas, e as frequências dos termos são calculadas a partir
+#' de uma matriz de documentos-frequência.
 #'
+#' @param token Um objeto de tokens, normalmente produzido por funções da biblioteca quanteda.
+#' @param n Um número inteiro especificando o tamanho dos n-gramas. O padrão é 2.
+#' @param arquivo O caminho do arquivo onde o dicionário será salvo.
 #'
-#' @param token Objeto do tipo token. Criado com [quanteda::tokens()]
-#' @param n Número de ngrams
-#' @param arquivo Local para salvar o arquivo. Deve terminar com `/`
+#' @return Esta função não retorna um valor diretamente, mas salva um arquivo CSV contendo
+#' o dicionário de termos.
 #'
-#' @return Um arquivo csv com as 500 expressões mais frequentes
+#' @import quanteda
+#' @importFrom utils write.csv2
 #' @export
 #'
 #' @examples
-dicionario.Criar = function(token, n = 2, arquivo){
+#' token <- quanteda::tokens(c("bigram", "analysis", "example"))
+#' dicionario_criar(token, arquivo = "meu_dicionario.csv")
+dicionario_criar = function(token, n = 2, arquivo){
 
   quanteda::tokens_ngrams(
      token,
@@ -28,20 +33,24 @@ dicionario.Criar = function(token, n = 2, arquivo){
               fileEncoding = 'UTF-8')
 }
 
-#' Aplica o dicionário de expressões jurídicas
+#' Aplica dicionários de n-gramas a tokens
 #'
-#'@description
-#'`dicionario.Aplicar()` aplica aos tokens o dicionário de expressões criados para facilitar as análises textuais de decisões judiciais.
-#'O dicionário consta da base de dados do pacote e as atualizações serão informadas no Github
+#' Esta função aplica uma série de dicionários de n-gramas a um objeto de tokens,
+#' substituindo sequências de tokens que correspondem aos n-gramas nos dicionários
+#' por tokens compostos.
 #'
+#' @param token Um objeto de tokens, geralmente produzido por funções da biblioteca quanteda.
 #'
-#' @param token Objeto do tipo token. Criado com [quanteda::tokens()]
+#' @return Um objeto de tokens modificado após a aplicação dos dicionários de n-gramas.
 #'
-#' @return Os tokens com as expressões unidas
+#' @import quanteda
+#' @importFrom utils read.csv
 #' @export
 #'
 #' @examples
-dicionario.Aplicar = function(token) {
+#' token <- quanteda::tokens(c("bigram", "analysis", "example"))
+#' token_modificado <- dicionario_aplicar(token)
+dicionario_aplicar = function(token) {
 
   # Aplica o dicionario 6grams
   token <-

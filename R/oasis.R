@@ -16,10 +16,10 @@
 #' @export
 #' @examples
 #' # Realizar pesquisa no OASIS e obter os resultados
-#' oasis("direitos humanos")
+#' oasis('"perfilamento racial" AND "controle de constitucionalidade"')
 #'
 #' # Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
-#' oasis("direitos humanos", rayyan = TRUE)
+#' oasis('"perfilamento racial" AND "controle de constitucionalidade"', rayyan = TRUE)
 oasis <- function(pesquisa, rayyan = FALSE) {
   headers <- c("accept" = "application/json")
 

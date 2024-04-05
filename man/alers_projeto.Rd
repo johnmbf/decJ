@@ -24,4 +24,10 @@ dado o número da norma e o ano de sua proposição.
 \examples{
 # Buscar informações sobre uma proposição legislativa
 alers_projeto(norma = 10098, ano = 1994)
+
 }
+\seealso{
+Other legislativo: 
+\code{\link{alepr_projeto}()}
+}
+\concept{legislativo}

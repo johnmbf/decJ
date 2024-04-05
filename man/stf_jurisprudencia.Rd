@@ -16,7 +16,7 @@ stf_jurisprudencia(
 
 \item{classe}{Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.}
 
-\item{base}{Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos", "decisoes" ou ambos. O padrão é buscar em ambas as bases.}
+\item{base}{Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".}
 
 \item{quantidade}{O número de resultados desejados. O padrão é 25.}
 }
@@ -36,7 +36,15 @@ stf_jurisprudencia(classe = "ADI", quantidade = 10)
 
 # Buscar jurisprudência por classe de processo com base específica
 stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
+
 }
 \seealso{
-\code{\link[=stf_jurisprudencia_download]{stf_jurisprudencia_download()}}
+Other stf: 
+\code{\link{stf_decisoes}()},
+\code{\link{stf_info}()},
+\code{\link{stf_inicial}()},
+\code{\link{stf_jurisprudencia_download}()},
+\code{\link{stf_partes}()},
+\code{\link{stf_relator}()}
 }
+\concept{stf}

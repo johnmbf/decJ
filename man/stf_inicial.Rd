@@ -21,5 +21,16 @@ Esta função permite baixar a petição inicial de processos do Supremo Tribuna
 }
 \examples{
 # Baixar a petição inicial do processo com número 12345 da classe "RE"
-downloadSTF.inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+stf_inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+
 }
+\seealso{
+Other stf: 
+\code{\link{stf_decisoes}()},
+\code{\link{stf_info}()},
+\code{\link{stf_jurisprudencia_download}()},
+\code{\link{stf_jurisprudencia}()},
+\code{\link{stf_partes}()},
+\code{\link{stf_relator}()}
+}
+\concept{stf}

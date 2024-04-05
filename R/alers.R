@@ -12,6 +12,8 @@
 #' @examples
 #' # Buscar informações sobre uma proposição legislativa
 #' alers_projeto(norma = 10098, ano = 1994)
+#'
+#' @family legislativo
 alers_projeto <- function(norma, ano, .reportar = TRUE){
 
   header <- c('user_agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0')

@@ -24,9 +24,17 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre o relator do processo.
 }
 \examples{
-stf_relator("RE", "12345/2023")
-stf_relator("ADI", c("54321/2022", "67890/2021"))
+stf_relator("RE", "12345")
+stf_relator("ADI", c("54321", "67890"))
+
 }
 \seealso{
-\code{\link[=stf_partes]{stf_partes()}} \code{\link[=stf_info]{stf_info()}} \link{stf_decisoes}
+Other stf: 
+\code{\link{stf_decisoes}()},
+\code{\link{stf_info}()},
+\code{\link{stf_inicial}()},
+\code{\link{stf_jurisprudencia_download}()},
+\code{\link{stf_jurisprudencia}()},
+\code{\link{stf_partes}()}
 }
+\concept{stf}
