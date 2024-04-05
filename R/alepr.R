@@ -134,10 +134,10 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
     dplyr::select(1:7)
 
   # Retorna a tabela
-  tabela
 
   if (.reportar == TRUE) {
     glue::glue("Extrai do site da Assembleia Legislativa do Estado do Paraná as informações sobre a proposição que deu origem a norma nº {prop_numero} de {prop_ano}") |> cat()
   }
 
+  tabela
 }
