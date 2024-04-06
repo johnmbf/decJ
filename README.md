@@ -5,9 +5,10 @@
 
 <!-- badges: start -->
 
-![GitHub License](https://img.shields.io/github/license/johnmbf/decJ)
-![GitHub release (latest by
-date)](https://img.shields.io/github/v/release/johnmbf/decJ)
+[![GitHub
+License](https://img.shields.io/github/license/johnmbf/decJ)](https://img.shields.io/github/license/johnmbf/decJ)
+[![GitHub release (latest by
+date)](https://img.shields.io/github/v/release/johnmbf/decJ)](https://img.shields.io/github/v/release/johnmbf/decJ)
 [![DOI](https://zenodo.org/badge/654781778.svg)](https://zenodo.org/doi/10.5281/zenodo.10910046)
 [![R-CMD-check](https://github.com/johnmbf/decJ/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/johnmbf/decJ/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
