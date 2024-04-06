@@ -20,8 +20,8 @@ Ela extrai os metadados dos registros encontrados, como título, autores, resumo
 }
 \examples{
 # Realizar pesquisa no OASIS e obter os resultados
-oasis('"perfilamento racial" AND "controle de constitucionalidade"')
+oasis('"perfilamento racial"')
 
 # Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
-oasis('"perfilamento racial" AND "controle de constitucionalidade"', rayyan = TRUE)
+oasis('"perfilamento racial"', rayyan = TRUE)
 }

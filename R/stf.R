@@ -382,7 +382,7 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
     body$query$bool$filter[[1]]$query_string$query <- busca
     body$post_filter$bool$must[[1]]$term$base <- base
   } else if (is.null(busca) & !is.null(classe)) {
-    body <- decJ::busca_classe
+    body <- busca_classe
     body$query$bool$filter$query_string$query <- classe
     body$post_filter$bool$must$term$base <- base
   } else if ((!is.null(busca) & !is.null(classe))) {
@@ -416,7 +416,6 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' Os documentos são salvos como arquivos PDF.
 #'
 #' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
-#' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
 #' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".
 #' @param quantidade O número de documentos a serem baixados. O padrão é 25.
 #' @param arquivo O diretório onde os arquivos serão salvos. O padrão é o diretório atual.

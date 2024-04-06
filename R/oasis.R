@@ -16,10 +16,10 @@
 #' @export
 #' @examples
 #' # Realizar pesquisa no OASIS e obter os resultados
-#' oasis('"perfilamento racial" AND "controle de constitucionalidade"')
+#' oasis('"perfilamento racial"')
 #'
 #' # Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
-#' oasis('"perfilamento racial" AND "controle de constitucionalidade"', rayyan = TRUE)
+#' oasis('"perfilamento racial"', rayyan = TRUE)
 oasis <- function(pesquisa, rayyan = FALSE) {
   headers <- c("accept" = "application/json")
 
@@ -41,6 +41,12 @@ oasis <- function(pesquisa, rayyan = FALSE) {
   ) |>
     httr::content("text") |>
     jsonlite::fromJSON()
+
+
+  if (n_page$resultCount == 0) {
+    cat("A busca retornou nenhum registro! Verifique os parâmetros de busca utilizados")
+    return(NULL)
+  }
 
   for (i in 1:ceiling(n_page$resultCount / 100)) {
     parametros$page <- i

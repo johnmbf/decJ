@@ -19,8 +19,6 @@ stf_jurisprudencia_download(
 \item{quantidade}{O número de documentos a serem baixados. O padrão é 25.}
 
 \item{arquivo}{O diretório onde os arquivos serão salvos. O padrão é o diretório atual.}
-
-\item{classe}{Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.}
 }
 \description{
 Esta função baixa jurisprudência do Supremo Tribunal Federal (STF) utilizando a API do portal de jurisprudência STF.

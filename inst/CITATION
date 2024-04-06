@@ -1,0 +1,20 @@
+citHeader("Para citar o decJ em sua publicação, use: ")
+
+title <- "{decJ}: Auxílio em pesquisas com processos e decisões judiciais"
+url <- "https://github.com/johnmbf/decJ"
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(
+  bibtype  = "Manual",
+  title    = title,
+  author   = c(person('Jonathan Morais Barcellos', 'Ferreira')),
+  year = year,
+  note = note,
+  url = url,
+  textVersion = list(
+    paste0(
+    "ABNT: FERREIRA, Jonathan Morais Barcellos. ", title, ". Versão ", meta$Version, ". [Rio Grande], ", year, ". Disponível em: ", url),
+    paste0(
+    "APA: Ferreira, J. M. B. (", year, "). ", title, " (Versão ", meta$Version, "). ", url, "."))
+)

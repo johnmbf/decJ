@@ -1,6 +1,6 @@
 Package: decJ
 Title: Auxílio em pesquisas com processos e decisões judiciais
-Version: 1.0.0.9000
+Version: 1.0.0.9001
 Authors@R: c(
     person("Jonathan", "Ferreira", , "jonathanmbferreira@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9946-2173")),
@@ -14,10 +14,8 @@ RoxygenNote: 7.2.3
 URL: https://github.com/johnmbf/decJ
 BugReports: https://github.com/johnmbf/decJ/issues
 Imports: 
-    beepr,
     httr,
     jsonlite,
-    magrittr,
     stringr,
     xml2,
     quanteda,
@@ -26,7 +24,10 @@ Imports:
     tibble,
     tidyr,
     purrr,
-    lifecycle
+    glue,
+    curl,
+    pdftools,
+    tabulizer
 Depends: 
     R (>= 3.5.0)
 LazyData: true
