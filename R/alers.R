@@ -43,6 +43,12 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   url <- 'https://ww3.al.rs.gov.br/legis/M010/M0100008.asp'
 
   r <- httr::GET(url, httr::add_headers(header), query = parametros)
+
+  if (r$status_code != 200) {
+    cat("Erro ao acessar a página da ALERS.")
+    return(NULL)
+  }
+
   conteudo <- r |> httr::content(encoding = 'ISO-8859-1')
 
   id <- conteudo |> xml2::xml_find_all('//input[@name="Hid_IdNorma1"]') |> xml2::xml_attr('value')
@@ -60,6 +66,12 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   parametros$Hid_IdNorma = id
 
   r <- httr::GET(url, httr::add_headers(header), query = parametros)
+
+  if (r$status_code != 200) {
+    cat("Erro ao acessar a página da ALERS.")
+    return(NULL)
+  }
+
   conteudo <- r |> httr::content(encoding = 'ISO-8859-1')
   id <- conteudo |> xml2::xml_find_all('//a[@href="javascript:;"]') |> xml2::xml_attr('onclick')
 
@@ -72,6 +84,12 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   url <- glue::glue('https://ww3.al.rs.gov.br/legislativo/ExibeProposicao/tabid/325/SiglaTipo/{id[1]}/NroProposicao/{id[2]}/AnoProposicao/{id[3]}/Default.aspx')
 
   r <- httr::GET(url, httr::add_headers(header))
+
+  if (r$status_code != 200) {
+    cat("Erro ao acessar a página da ALERS.")
+    return(NULL)
+  }
+
   conteudo <- httr::content(r)
 
   proposicao <- conteudo |> xml2::xml_find_all('//div[@class="dvproposicao"]') |> xml2::xml_text() |> stringr::str_split(':', simplify = T) |> stringr::str_trim()

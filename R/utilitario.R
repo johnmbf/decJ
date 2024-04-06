@@ -39,6 +39,11 @@ utilitario_tscolor <- function(album, n = 5){
 #' @examples
 #' utilitario_remover_cr()
 #' utilitario_remover_cr(txt_path = 'caminho/para/pasta', rodape = 3, cabecalho = 1)
+#' @import pdftools
+#' @import stringr
+#' @import purrr
+#' @importFrom stringr str_extract
+#' @importFrom purrr map map_df
 #' @export
 #'
 #' @family utilitarios
@@ -51,10 +56,11 @@ utilitario_remover_cr <- function(txt_path = '.', rodape = 4, cabecalho = 2){
   ## aplicar a função ~ {... em cada pdf)
   tabela <- purrr::map_df(pdf, ~ {
     ## extrair o texto de todas as páginas de cada pdf
-    texto <- tabulizer::extract_text(
-      .x,
-      1:pdftools::pdf_length((.x))
-    )
+    # texto <- tabulizer::extract_text(
+    #   .x,
+    #   1:pdftools::pdf_length((.x))
+    # )
+    texto <- pdftools::pdf_text(.x)
     ## cria uma lista com o texto sem cabeçalho e rodapé
     ## para cada página do texto aplica a função
     texto_tratado <- purrr::map(texto, function(pagina) {
