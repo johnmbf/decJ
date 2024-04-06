@@ -2,3 +2,20 @@ url: ~
 template:
   bootstrap: 5
 lang: pt
+navbar:
+  structure:
+    left: [intro, func, news]
+    right: [twitter, github]
+  components:
+    twitter:
+      icon: fa-twitter
+      href: https://twitter.com/jo_mbf
+    intro:
+      text: "Introdução"
+      href: index.html
+    func:
+      text: "Funções"
+      href: reference/index.html
+    news:
+      text: "Novidades"
+      href: news/index.html

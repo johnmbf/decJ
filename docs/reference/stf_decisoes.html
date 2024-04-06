@@ -22,16 +22,25 @@ e retorna um data.frame contendo informações sobre as decisões do processo.">
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
-  <a class="nav-link" href="../reference/index.html">Referência</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../index.html">Introdução</a>
+</li>
+<li class="active nav-item">
+  <a class="nav-link" href="../reference/index.html">Funções</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">Novidades</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Alternar de navegação" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Procurar" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://twitter.com/jo_mbf">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/johnmbf/decJ/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -104,15 +113,9 @@ e retorna um <code>data.frame</code> contendo informações sobre as decisões d
 
     <div class="section level2">
     <h2 id="ref-examples">Exemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">stf_decisoes</span><span class="op">(</span><span class="st">"RE"</span>, <span class="st">"12345"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Classe Data Nome Julgador Decisao</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  12345   NA   NA       NA      NA</span>
-<span class="r-in"><span><span class="fu">stf_decisoes</span><span class="op">(</span><span class="st">"ADI"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"54321"</span>, <span class="st">"67890"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Classe Data Nome Julgador Decisao</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  54321   NA   NA       NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  67890   NA   NA       NA      NA</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stf_decisoes</span><span class="op">(</span><span class="st">"RE"</span>, <span class="st">"12345"</span><span class="op">)</span></span>
+<span><span class="fu">stf_decisoes</span><span class="op">(</span><span class="st">"ADI"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"54321"</span>, <span class="st">"67890"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>Nesta página</h2>
     </nav></aside></div>
