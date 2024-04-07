@@ -21,8 +21,10 @@ Esta função extrai texto de documentos PDF, remove cabeçalhos e rodapés espe
 de cada página e retorna uma tabela com o texto tratado para cada documento.
 }
 \examples{
+\dontrun{
 utilitario_remover_cr()
 utilitario_remover_cr(txt_path = 'caminho/para/pasta', rodape = 3, cabecalho = 1)
+}
 }
 \seealso{
 Other utilitarios: 

@@ -26,8 +26,8 @@ e retorna um \code{data.frame} contendo informações sobre o processo, incluind
 (ajuizamento) e o assunto do processo.
 }
 \examples{
-stf_info("RE", "12345")
-stf_info("ADI", c("54321", "67890"))
+stf_info("ADPF", "800")
+stf_info("ADPF", c("900", "800"))
 
 }
 \seealso{

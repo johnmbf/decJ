@@ -29,13 +29,10 @@ Você pode pesquisar por palavras-chave ou por classe de processo.
 }
 \examples{
 # Buscar jurisprudência por palavras-chave
-stf_jurisprudencia(busca = "direitos humanos", quantidade = 10)
+stf_jurisprudencia(busca = "direitos humanos", base = 'decisoes', quantidade = 10)
 
 # Buscar jurisprudência por classe de processo
-stf_jurisprudencia(classe = "ADI", quantidade = 10)
-
-# Buscar jurisprudência por classe de processo com base específica
-stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
+stf_jurisprudencia(classe = "ADPF", base = 'acordaos', quantidade = 10)
 
 }
 \seealso{

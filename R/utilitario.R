@@ -37,8 +37,10 @@ utilitario_tscolor <- function(album, n = 5){
 #' @param cabecalho O número de linhas do cabeçalho a serem removidas de cada página. O padrão é 2.
 #' @return Uma tabela com uma coluna de texto e uma coluna de identificação do documento.
 #' @examples
+#' \dontrun{
 #' utilitario_remover_cr()
 #' utilitario_remover_cr(txt_path = 'caminho/para/pasta', rodape = 3, cabecalho = 1)
+#' }
 #' @import pdftools
 #' @import stringr
 #' @import purrr

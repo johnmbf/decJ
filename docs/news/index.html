@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">decJ</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Alternar de navegação">
@@ -54,17 +54,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0.900" id="decj-100900">decJ 1.0.0.900<a class="anchor" aria-label="anchor" href="#decj-100900"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0.900" id="decj-100900x">decJ 1.0.0.900X<a class="anchor" aria-label="anchor" href="#decj-100900x"></a></h2>
 <div class="section level3">
 <h3 id="correções-1-0-0-900">Correções<a class="anchor" aria-label="anchor" href="#corre%C3%A7%C3%B5es-1-0-0-900"></a></h3>
 <ul><li><p>Correção da documentação das funções. Algumas funções estavam com exemplo impossível de funcionar pois não respeitavam os parâmetros. Criei também famílias de funções.</p></li>
 <li><p>Os dados que antes eram acessíveis pelo pacote se tornaram internos. Eles ainda podem ser acessados dentro de <code>R/sysdata.rda</code>.</p></li>
+<li><p><code><a href="../reference/stf_jurisprudencia_download.html">stf_jurisprudencia_download()</a></code> agora funciona como <code><a href="../reference/stf_jurisprudencia.html">stf_jurisprudencia()</a></code> aceitando tanto a busca por classe quanto por palavras-chave.</p></li>
+<li><p><code><a href="../reference/tjrs_jurisprudencia.html">tjrs_jurisprudencia()</a></code> agora possui uma forma de avisar ao usuário que a busca não retornou resultados.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="novas-funções-1-0-0-900">Novas funções<a class="anchor" aria-label="anchor" href="#novas-fun%C3%A7%C3%B5es-1-0-0-900"></a></h3>
 <ul><li><p>Nova <code><a href="../reference/alepr_projeto.html">alepr_projeto()</a></code> permite que você extraia do site da Assembleia Legislativa do Paraná informações sobre proposições legislativas a partir de uma legislação já aprovada.</p></li>
 <li><p>Nova <code><a href="../reference/utilitario_tscolor.html">utilitario_tscolor()</a></code> permite que você crie uma paleta de cores para gráficos utilizando de cores referente as capas dos albuns da Taylor Swift. Até agora temos até o 1988 Taylor’s Version.</p></li>
 <li><p>Nova <code><a href="../reference/utilitario_remover_cr.html">utilitario_remover_cr()</a></code> permite que você remova cabeçalhos e rodapés de arquivos de texto que foram convertidos de PDFs. A função é muito útil quando estamos analisando documentos e precisamos desconsiderar os cabeçalhos e rodapés. Os padrões da função foram testados com acórdãos do Supremo Tribunal Federal e foram suficientes. Talvez para trabalhar com outros tribunais ou documentos seja necessário calibrar a função.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="problemas-1-0-0-900">Problemas<a class="anchor" aria-label="anchor" href="#problemas-1-0-0-900"></a></h3>
+<ul><li>As funções de dicionários estavam com problemas devido a sua dependência com o pacote Quanteda. Assim que acharmos uma forma de resolver isso, ela voltará ao pacote. De todo modo, o script da função pode ser encontrado dentro da pasta R/.</li>
 </ul></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>Nesta página</h2>

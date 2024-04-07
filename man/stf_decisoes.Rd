@@ -27,8 +27,8 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre as decisões do processo.
 }
 \examples{
-stf_decisoes("RE", "12345")
-stf_decisoes("ADI", c("54321", "67890"))
+stf_decisoes("ADPF", "800")
+stf_decisoes("ADPF", c("800", "900"))
 
 }
 \seealso{

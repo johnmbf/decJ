@@ -18,7 +18,6 @@ Imports:
     jsonlite,
     stringr,
     xml2,
-    quanteda,
     dplyr,
     rvest,
     tibble,

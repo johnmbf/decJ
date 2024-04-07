@@ -19,9 +19,11 @@ Esta função realiza uma pesquisa no OASIS utilizando a API e retorna os result
 Ela extrai os metadados dos registros encontrados, como título, autores, resumo, palavras-chave, data de publicação, notas e URL.
 }
 \examples{
+\dontrun{
 # Realizar pesquisa no OASIS e obter os resultados
 oasis('"perfilamento racial"')
 
 # Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
 oasis('"perfilamento racial"', rayyan = TRUE)
+}
 }

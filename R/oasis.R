@@ -15,11 +15,13 @@
 #' @importFrom stringr str_replace_all str_squish
 #' @export
 #' @examples
+#' \dontrun{
 #' # Realizar pesquisa no OASIS e obter os resultados
 #' oasis('"perfilamento racial"')
 #'
 #' # Realizar pesquisa no OASIS e formatar os resultados para uso com o Rayyan
 #' oasis('"perfilamento racial"', rayyan = TRUE)
+#' }
 oasis <- function(pesquisa, rayyan = FALSE) {
   headers <- c("accept" = "application/json")
 

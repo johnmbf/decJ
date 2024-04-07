@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">decJ</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Alternar de navegação">
@@ -96,6 +96,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Exemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Buscar jurisprudência com base na classe processual</span></span>
+<span><span class="va">tjrs</span> <span class="op">&lt;-</span> <span class="fu">tjrs_jurisprudencia</span><span class="op">(</span>classe <span class="op">=</span> <span class="st">"Direta de Inconstitucionalidade"</span>, julgamento_inicial <span class="op">=</span> <span class="st">"01/01/2023"</span>, julgamento_final <span class="op">=</span> <span class="st">"31/03/2023"</span><span class="op">)</span></span>
+<span><span class="va">tjrs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Caso ele não encontre nada, mostrará e um aviso e retornará um valor NULL</span></span>
 <span><span class="fu">tjrs_jurisprudencia</span><span class="op">(</span>classe <span class="op">=</span> <span class="st">"Direta de Inconstitucionalidade"</span>, julgamento_inicial <span class="op">=</span> <span class="st">"01/01/2023"</span>, julgamento_final <span class="op">=</span> <span class="st">"31/02/2023"</span><span class="op">)</span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>Nesta página</h2>

@@ -7,9 +7,17 @@
 #' @param julgamento_final Data de julgamento final das decisões a serem buscadas (no formato "DD/MM/YYYY"). O padrão é "" (vazio), indicando que não há restrição de data final.
 #' @param .reportar Se TRUE, exibe uma mensagem informando sobre os parâmetros da busca realizada. O padrão é TRUE.
 #' @return Um data frame contendo informações sobre as decisões encontradas, incluindo número do processo, data do julgamento, relator, ementa e tribunal.
+#'
+#' @importFrom glue glue
+#'
 #' @export
+#'
 #' @examples
 #' # Buscar jurisprudência com base na classe processual
+#' tjrs <- tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/03/2023")
+#' tjrs |> head(5)
+#'
+#' # Caso ele não encontre nada, mostrará e um aviso e retornará um valor NULL
 #' tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/02/2023")
 tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_final = "", .reportar = TRUE) {
   url <- "https://www.tjrs.jus.br/buscas/jurisprudencia/ajax.php"
@@ -31,9 +39,19 @@ tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_fina
     body = parametros
   )
 
+  if(res$status_code != 200){
+    cat("Erro ao acessar o portal de jurisprudência do TJRS")
+    return(NULL)
+  }
+
   conteudo <- httr::content(res, as = "text") |> jsonlite::fromJSON()
 
   n_paginas <- ceiling(conteudo$response$numFound / 10)
+
+  if (is.null(conteudo$response$numFound)) {
+    glue::glue("Nenhuma decisão encontrada") |> print()
+    return(NULL)
+  }
 
   df <- purrr::map_dfr(1:n_paginas, purrr::slowly(~ {
     url <- "https://www.tjrs.jus.br/buscas/jurisprudencia/ajax.php"
@@ -60,17 +78,17 @@ tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_fina
 
   if (.reportar == TRUE){
   if (julgamento_inicial == "") {
-    glue::glue_col(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {blue {classe}} proferidas até {julgamento_final}.") |> print()
+    glue::glue(
+      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas até {julgamento_final}.") |> print()
   } else if (julgamento_final == ""){
-    glue::glue_col(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {blue {classe}} proferidas desde {julgamento_inicial}.") |> print()
+    glue::glue(
+      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas desde {julgamento_inicial}.") |> print()
   } else if (julgamento_final == "" & julgamento_inicial == "") {
-    glue::glue_col(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {blue {classe}} proferidas.") |> print()
+    glue::glue(
+      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas.") |> print()
   } else {
-  glue::glue_col(
-    "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {blue {classe}} proferidas entre {julgamento_inicial} e {julgamento_final}.") |> print()}}
+    glue::glue(
+      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas entre {julgamento_inicial} e {julgamento_final}.") |> print()}}
 
   return(df)
 }

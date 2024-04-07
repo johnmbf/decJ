@@ -24,8 +24,8 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre o relator do processo.
 }
 \examples{
-stf_relator("RE", "12345")
-stf_relator("ADI", c("54321", "67890"))
+stf_relator("ADPF", "800")
+stf_relator("ADPF", c("800", "900"))
 
 }
 \seealso{

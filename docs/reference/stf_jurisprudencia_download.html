@@ -14,7 +14,7 @@ Os documentos são salvos como arquivos PDF."><meta property="og:image" content=
     
     <a class="navbar-brand me-2" href="../index.html">decJ</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Alternar de navegação">
@@ -67,7 +67,8 @@ Os documentos são salvos como arquivos PDF.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span></span>
-<span>  busca <span class="op">=</span> <span class="st">" "</span>,</span>
+<span>  busca <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  classe <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acordaos"</span>, <span class="st">"decisoes"</span><span class="op">)</span>,</span>
 <span>  quantidade <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  arquivo <span class="op">=</span> <span class="st">"."</span></span>
@@ -80,20 +81,20 @@ Os documentos são salvos como arquivos PDF.</p>
 <dd><p>Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.</p></dd>
 
 
+<dt>classe</dt>
+<dd><p>Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.</p></dd>
+
+
 <dt>base</dt>
 <dd><p>Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".</p></dd>
 
 
 <dt>quantidade</dt>
-<dd><p>O número de documentos a serem baixados. O padrão é 25.</p></dd>
+<dd><p>O número de resultados desejados. O padrão é 25.</p></dd>
 
 
 <dt>arquivo</dt>
 <dd><p>O diretório onde os arquivos serão salvos. O padrão é o diretório atual.</p></dd>
-
-
-<dt>classe</dt>
-<dd><p>Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -110,13 +111,10 @@ Os documentos são salvos como arquivos PDF.</p>
     <div class="section level2">
     <h2 id="ref-examples">Exemplos<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Baixar jurisprudência por palavras-chave</span></span>
-<span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span>busca <span class="op">=</span> <span class="st">"direitos humanos"</span>, base <span class="op">=</span> <span class="st">"acordaos"</span>, quantidade <span class="op">=</span> <span class="fl">10</span>, arquivo <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
+<span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span>busca <span class="op">=</span> <span class="st">"direitos humanos"</span>, base <span class="op">=</span> <span class="st">"acordaos"</span>, quantidade <span class="op">=</span> <span class="fl">10</span>, arquivo <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Baixar jurisprudência por classe de processo</span></span>
-<span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span>classe <span class="op">=</span> <span class="st">"ADI"</span>, quantidade <span class="op">=</span> <span class="fl">10</span>, arquivo <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Baixar jurisprudência por classe de processo com base específica</span></span>
-<span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span>classe <span class="op">=</span> <span class="st">"RE"</span>, base <span class="op">=</span> <span class="st">"acordaos"</span>, quantidade <span class="op">=</span> <span class="fl">10</span>, arquivo <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
+<span><span class="fu">stf_jurisprudencia_download</span><span class="op">(</span>classe <span class="op">=</span> <span class="st">"ADPF"</span>, base <span class="op">=</span> <span class="st">'acordaos'</span>, quantidade <span class="op">=</span> <span class="fl">10</span>, arquivo <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>Nesta página</h2>

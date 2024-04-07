@@ -5,7 +5,8 @@
 \title{Baixa jurisprudência do Supremo Tribunal Federal (STF)}
 \usage{
 stf_jurisprudencia_download(
-  busca = " ",
+  busca = NULL,
+  classe = NULL,
   base = c("acordaos", "decisoes"),
   quantidade = 25,
   arquivo = "."
@@ -14,9 +15,11 @@ stf_jurisprudencia_download(
 \arguments{
 \item{busca}{Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.}
 
+\item{classe}{Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.}
+
 \item{base}{Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".}
 
-\item{quantidade}{O número de documentos a serem baixados. O padrão é 25.}
+\item{quantidade}{O número de resultados desejados. O padrão é 25.}
 
 \item{arquivo}{O diretório onde os arquivos serão salvos. O padrão é o diretório atual.}
 }
@@ -27,13 +30,10 @@ Os documentos são salvos como arquivos PDF.
 }
 \examples{
 # Baixar jurisprudência por palavras-chave
-stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = ".")
 
 # Baixar jurisprudência por classe de processo
-stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downloads/")
-
-# Baixar jurisprudência por classe de processo com base específica
-stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+stf_jurisprudencia_download(classe = "ADPF", base = 'acordaos', quantidade = 10, arquivo = ".")
 
 }
 \seealso{

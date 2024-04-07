@@ -19,8 +19,8 @@
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_partes("RE", "12345")
-#' stf_partes("ADI", c("54321", "67890"))
+#' stf_partes("ADPF", "800")
+#' stf_partes("ADPF", c("800", "900"))
 #'
 #' @family stf
 stf_partes <- function(classe, processo){
@@ -78,8 +78,8 @@ stf_partes <- function(classe, processo){
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_info("RE", "12345")
-#' stf_info("ADI", c("54321", "67890"))
+#' stf_info("ADPF", "800")
+#' stf_info("ADPF", c("900", "800"))
 #'
 #' @family stf
 stf_info <- function(classe, processo){
@@ -142,8 +142,8 @@ stf_info <- function(classe, processo){
 #' @importFrom stringr str_split_i str_trim
 #' @export
 #' @examples
-#' stf_relator("RE", "12345")
-#' stf_relator("ADI", c("54321", "67890"))
+#' stf_relator("ADPF", "800")
+#' stf_relator("ADPF", c("800", "900"))
 #'
 #' @family stf
 stf_relator = function(classe, processo){
@@ -204,8 +204,8 @@ stf_relator = function(classe, processo){
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
-#' stf_decisoes("RE", "12345")
-#' stf_decisoes("ADI", c("54321", "67890"))
+#' stf_decisoes("ADPF", "800")
+#' stf_decisoes("ADPF", c("800", "900"))
 #'
 #' @family stf
 stf_decisoes = function(classe, processo){
@@ -285,7 +285,7 @@ stf_decisoes = function(classe, processo){
 #' @export
 #' @examples
 #' # Baixar a petição inicial do processo com número 12345 da classe "RE"
-#' stf_inicial(classe = "RE", n = 12345, arquivo = "caminho/para/salvar/")
+#' stf_inicial(classe = "ADPF", n = 800, arquivo = ".")
 #'
 #' @family stf
 stf_inicial <- function(classe, n, arquivo) {
@@ -365,13 +365,10 @@ stf_inicial <- function(classe, n, arquivo) {
 #' @export
 #' @examples
 #' # Buscar jurisprudência por palavras-chave
-#' stf_jurisprudencia(busca = "direitos humanos", quantidade = 10)
+#' stf_jurisprudencia(busca = "direitos humanos", base = 'decisoes', quantidade = 10)
 #'
 #' # Buscar jurisprudência por classe de processo
-#' stf_jurisprudencia(classe = "ADI", quantidade = 10)
-#'
-#' # Buscar jurisprudência por classe de processo com base específica
-#' stf_jurisprudencia(classe = "RE", base = "acordaos", quantidade = 10)
+#' stf_jurisprudencia(classe = "ADPF", base = 'acordaos', quantidade = 10)
 #'
 #' @family stf
 stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
@@ -416,8 +413,9 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' Os documentos são salvos como arquivos PDF.
 #'
 #' @param busca Uma string contendo palavras-chave para a busca de jurisprudência. Se não especificado, a busca será realizada por classe.
+#' @param classe Uma string contendo a classe de processo para a busca de jurisprudência. Se não especificado, a busca será realizada por palavras-chave.
 #' @param base Um vetor contendo os tipos de documentos a serem buscados. Pode incluir "acordaos" ou "decisoes".
-#' @param quantidade O número de documentos a serem baixados. O padrão é 25.
+#' @param quantidade O número de resultados desejados. O padrão é 25.
 #' @param arquivo O diretório onde os arquivos serão salvos. O padrão é o diretório atual.
 #' @import httr
 #' @importFrom jsonlite fromJSON
@@ -426,26 +424,33 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' @export
 #' @examples
 #' # Baixar jurisprudência por palavras-chave
-#' stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+#' stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = ".")
 #'
 #' # Baixar jurisprudência por classe de processo
-#' stf_jurisprudencia_download(classe = "ADI", quantidade = 10, arquivo = "~/Downloads/")
-#'
-#' # Baixar jurisprudência por classe de processo com base específica
-#' stf_jurisprudencia_download(classe = "RE", base = "acordaos", quantidade = 10, arquivo = "~/Downloads/")
+#' stf_jurisprudencia_download(classe = "ADPF", base = 'acordaos', quantidade = 10, arquivo = ".")
 #'
 #' @family stf
-stf_jurisprudencia_download = function(busca = " ", base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
+stf_jurisprudencia_download = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
 
-  if (length(base) != 1){
+  if (!is.null(busca) & is.null(classe)) {
+    body <- busca_jurisprudencia
+    body$query$bool$filter[[1]]$query_string$query <- busca
+    body$post_filter$bool$must[[1]]$term$base <- base
+  } else if (is.null(busca) & !is.null(classe)) {
+    body <- busca_classe
+    body$query$bool$filter$query_string$query <- classe
+    body$post_filter$bool$must$term$base <- base
+  } else if ((!is.null(busca) & !is.null(classe))) {
+    cat("Essa função só funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+    return(NULL)
+  }
+
+  if (length(base) != 1) {
     cat("Você deve selecionar apenenas uma base, de acórdãos OU de decisões (monocráticas)")
     return(NULL)
   }
 
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
-  body <- busca_jurisprudencia
-  body$query$bool$filter[[1]]$query_string$query <- busca
-  body$post_filter$bool$must[[1]]$term$base <- base
 
   num_iteracoes <- ceiling(quantidade / 250)
 

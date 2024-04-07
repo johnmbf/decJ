@@ -26,8 +26,8 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
 }
 \examples{
-stf_partes("RE", "12345")
-stf_partes("ADI", c("54321", "67890"))
+stf_partes("ADPF", "800")
+stf_partes("ADPF", c("800", "900"))
 
 }
 \seealso{
