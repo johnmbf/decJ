@@ -46,7 +46,7 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   r <- httr::GET(url, httr::add_headers(header), query = parametros)
 
   if (r$status_code != 200) {
-    cat("Erro ao acessar a página da ALERS.")
+    cat("Erro ao acessar a pagina da ALERS.")
     return(NULL)
   }
 
@@ -69,7 +69,7 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   r <- httr::GET(url, httr::add_headers(header), query = parametros)
 
   if (r$status_code != 200) {
-    cat("Erro ao acessar a página da ALERS.")
+    cat("Erro ao acessar a pagina da ALERS.")
     return(NULL)
   }
 
@@ -87,7 +87,7 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
   r <- httr::GET(url, httr::add_headers(header))
 
   if (r$status_code != 200) {
-    cat("Erro ao acessar a página da ALERS.")
+    cat("Erro ao acessar a pagina da ALERS.")
     return(NULL)
   }
 
@@ -103,21 +103,21 @@ alers_projeto <- function(norma, ano, .reportar = TRUE){
 
   df <- data.frame(
     "norma" = paste(norma, ano, sep = '/'),
-    "Proposição" = proposicao[2],
-    "Proponente" = proponente[2],
-    "Assunto" = assunto[2],
-    "Ementa" = ementa[2],
-    "URL" = url
+    "proposicao" = proposicao[2],
+    "proponente" = proponente[2],
+    "assunto" = assunto[2],
+    "ementa" = ementa[2],
+    "url" = url
   )
 
   if (.reportar == TRUE) {
 
-    tipo <- ifelse(proposicao[2] |> stringr::str_detect("PR"), "Resolução", ifelse(proposicao[2] |> stringr::str_detect("PR"), "Lei", "norma"))
+    tipo <- ifelse(proposicao[2] |> stringr::str_detect("PR"), "Resolucao", ifelse(proposicao[2] |> stringr::str_detect("PR"), "Lei", "norma"))
 
     glue::glue(
-      "Essa função buscou no site da Assembleia Legislativa do Rio Grande do Sul a proposição referente à {tipo} nº {norma} de {ano}.",
+      "Essa funcao buscou no site da Assembleia Legislativa do Rio Grande do Sul a proposicao referente a {tipo} n {norma} de {ano}.",
       "A norma foi proposta pelo {proponente[2]} e autuada na Assembleia como {proposicao[2]}.",
-      "Você pode conferir a proposta em: {url}",
+      "Voce pode conferir a proposta em: {url}",
       "\t", .sep = '\n\n') |> print()
   }
 

@@ -389,7 +389,8 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
     body$query$bool$filter$query_string$query <- classe
     body$post_filter$bool$must$term$base <- base
   } else if ((!is.null(busca) & !is.null(classe))) {
-    stop("Essa função só funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+    cat("Essa funcao so funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+    return(NULL)
   }
 
   num_iteracoes <- ceiling(quantidade / 250)
@@ -448,12 +449,12 @@ stf_jurisprudencia_download = function(busca = NULL, classe = NULL, base = c("ac
     body$query$bool$filter$query_string$query <- classe
     body$post_filter$bool$must$term$base <- base
   } else if ((!is.null(busca) & !is.null(classe))) {
-    cat("Essa função só funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
+    cat("Essa funcao so funciona com busca por palavras chaves OU por classe. Ainda estamos desenvolvendo uma forma de trabalhar com as duas buscas juntas.")
     return(NULL)
   }
 
   if (length(base) != 1) {
-    cat("Você deve selecionar apenenas uma base, de acórdãos OU de decisões (monocráticas)")
+    cat("Voce deve selecionar apenenas uma base, de acordaos OU de decisoes (monocraticas)")
     return(NULL)
   }
 

@@ -42,7 +42,7 @@ tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_fina
   )
 
   if(res$status_code != 200){
-    cat("Erro ao acessar o portal de jurisprudência do TJRS")
+    cat("Erro ao acessar o portal de jurisprudencia do TJRS")
     return(NULL)
   }
 
@@ -51,7 +51,7 @@ tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_fina
   n_paginas <- ceiling(conteudo$response$numFound / 10)
 
   if (is.null(conteudo$response$numFound)) {
-    glue::glue("Nenhuma decisão encontrada") |> print()
+    glue::glue("Nenhuma decisao encontrada") |> print()
     return(NULL)
   }
 
@@ -81,16 +81,16 @@ tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_fina
   if (.reportar == TRUE){
   if (julgamento_inicial == "") {
     glue::glue(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas até {julgamento_final}.") |> print()
+      "Extrai do Portal de Jurisprudencia do Tribunal de Justica do Estado do Rio Grande do Sul todas as decisoes em {classe} proferidas ate {julgamento_final}.") |> print()
   } else if (julgamento_final == ""){
     glue::glue(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas desde {julgamento_inicial}.") |> print()
+      "Extrai do Portal de Jurisprudencia do Tribunal de Justica do Estado do Rio Grande do Sul todas as decisoes em {classe} proferidas desde {julgamento_inicial}.") |> print()
   } else if (julgamento_final == "" & julgamento_inicial == "") {
     glue::glue(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas.") |> print()
+      "Extrai do Portal de Jurisprudencia do Tribunal de Justica do Estado do Rio Grande do Sul todas as decisoes em {classe} proferidas.") |> print()
   } else {
     glue::glue(
-      "Extrai do Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul todas as decisões em {classe} proferidas entre {julgamento_inicial} e {julgamento_final}.") |> print()}}
+      "Extrai do Portal de Jurisprudencia do Tribunal de Justica do Estado do Rio Grande do Sul todas as decisoes em {classe} proferidas entre {julgamento_inicial} e {julgamento_final}.") |> print()}}
 
   return(df)
 }

@@ -1,0 +1,104 @@
+---
+title: "Usando a família STF"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usando a família STF}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(decJ)
+```
+
+# Família STF
+
+O pacote decJ surgiu para facilitar as pesquisas com processos e decisões do Supremo Tribunal Federal. Com o tempo, outras funções foram criadas - seja para trabalhar com outros tribunais, seja para trabalhar com atores políticos-jurídicos que chegam aos tribunais, além de utilitários.
+
+A histórica do decJ não importa. Nesse artigo, irei demonstrar como usar a família STF, que é composta por funções que facilitam a pesquisa de processos e decisões do Supremo Tribunal Federal. A família decJ é composta por 7 funções:
+
+```{r family, eval = FALSE}
+stf_decisoes()
+
+stf_info()
+
+stf_partes()
+
+stf_relator()
+
+stf_inicial()
+
+stf_jurisprudencia()
+
+stf_jurisprudencia_download()
+```
+
+Primeiro, vamos buscar informações sobre os processos. Para isso, podemos usar as primeiras quatro funções. A função `stf_info()` irá retornar dados como a classe e o número do processo, a data de ajuizamento e o assunto. Ela recebe dois argumentos que são obrigatórios: a classe e o número do processo.
+
+```{r info}
+decJ::stf_info(classe = "ADPF", processo = 800) |> rmarkdown::paged_table()
+```
+
+Pode acontecer de você querer mais de um processo. Para isso, basta passar um vetor de processos. 
+
+```{r info-2}
+decJ::stf_info(classe = "ADPF", processo = 800:810) |> rmarkdown::paged_table()
+```
+
+Agora, se você quiser mais de um processo de classes diferentes, você precisará utilizar de outros métodos integrados à função, como a familia purrr:
+
+```{r info-3}
+lista_processos <- list(
+  classe = c('ADI', 'ADPF', 'ADPF', 'ADO'),
+  processo = c(6000, 800, 780, 30)
+)
+
+purrr::map2_df(
+  lista_processos$classe, lista_processos$processo,
+  ~ decJ::stf_info(classe = .x, processo = .y)
+) |> rmarkdown::paged_table()
+```
+
+Note que a função `stf_info()` retorna um data.frame com as informações dos processos sem a identificação específica da classe, por isso não recomendamos usá-la dessa forma. 
+
+As demais funções desse primeiro grupo funcionam exatamente desse mesmo modo. As funções `stf_decisoes()`, `stf_partes()` e `stf_relator()` retornam informações sobre as decisões, partes e relatores dos processos, respectivamente, e recebem apenas dois argumentos: classe e o número do processo.
+
+Por fim, temos três funções mais complexas. A função `stf_inicial()` permite baixar a petição inicial de um determinado processo. Ela recebe dois argumentos obrigatórios: a classe e o número do processo, além do local em que o arquivo deve ser salvo. Um detalhe importante - a função só funciona se o processo for público!
+
+```{r inicial}
+decJ::stf_inicial(classe = "ADPF", n = 800, arquivo = ".")
+```
+
+Nesse caso, a função salvou na pasta atual a petição inicial da ADPF 800. 
+
+As funções `stf_jurisprudencia()` e `stf_jurisprudencia_download()` permitem buscar e baixar jurisprudência do STF, respectivamente. A busca da jurisprudência pode ser feita tanto com base em palavras-chaves quando com base em classe, mas ainda não é possível utilizar dos dois parâmetros simultaneamente. Além disso, você pode buscar tanto na base de acórdãos quanto de decisões e, também, separadamente. A função permite estabelecer um limite de processos (o padrão é 25).
+
+```{r jurisprudencia}
+acordaos <- decJ::stf_jurisprudencia(
+  busca = '"judicialização da política"',
+  base = 'acordaos',
+  quantidade = 5
+)
+acordaos |> rmarkdown::paged_table()
+```
+
+```{r jurisprudencia-2}
+decisoes <- decJ::stf_jurisprudencia(
+  classe = 'ADI',
+  base = 'decisoes',
+  quantidade = 5
+)
+decisoes |> rmarkdown::paged_table()
+```
+
+Feito. Agora você já sabe como usar a família STF do decJ. 
+
+
+
+
+

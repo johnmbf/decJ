@@ -103,7 +103,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
 
   # Verifica erro
   if (res$status_code != 200) {
-    print("Erro. Requisição retornou erro. Verifique os parâmetros")
+    print("Erro. Requisicao retornou erro. Verifique os parametros")
     return(NULL)
   }
 
@@ -114,7 +114,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
   tabela <- rvest::html_table(conteudo)
 
   if (length(tabela) == 0) {
-    cat("A função não retornou nenhum projeto. Verifique os parâmetros informados")
+    cat("A funcao nao retornou nenhum projeto. Verifique os parametros informados")
     return(NULL)
   }
 
@@ -138,7 +138,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
   # Retorna a tabela
 
   if (.reportar == TRUE) {
-    glue::glue("Extrai do site da Assembleia Legislativa do Estado do Paraná as informações sobre a proposição que deu origem a norma nº {prop_numero} de {prop_ano}") |> cat()
+    glue::glue("Extrai do site da Assembleia Legislativa do Estado do Parana as informacoes sobre a proposicao que deu origem a norma n {prop_numero} de {prop_ano}") |> cat()
   }
 
   tabela

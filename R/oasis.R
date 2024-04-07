@@ -46,7 +46,7 @@ oasis <- function(pesquisa, rayyan = FALSE) {
 
 
   if (n_page$resultCount == 0) {
-    cat("A busca retornou nenhum registro! Verifique os parâmetros de busca utilizados")
+    cat("A busca retornou nenhum registro! Verifique os parametros de busca utilizados")
     return(NULL)
   }
 
