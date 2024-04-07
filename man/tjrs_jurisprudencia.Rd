@@ -27,10 +27,12 @@ Um data frame contendo informações sobre as decisões encontradas, incluindo n
 Esta função permite buscar jurisprudência no Portal de Jurisprudência do Tribunal de Justiça do Estado do Rio Grande do Sul (TJRS) com base na classe processual e no período de julgamento.
 }
 \examples{
+\dontrun{
 # Buscar jurisprudência com base na classe processual
 tjrs <- tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/03/2023")
 tjrs |> head(5)
 
 # Caso ele não encontre nada, mostrará e um aviso e retornará um valor NULL
 tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/02/2023")
+}
 }

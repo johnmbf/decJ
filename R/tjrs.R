@@ -13,12 +13,14 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Buscar jurisprudência com base na classe processual
 #' tjrs <- tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/03/2023")
 #' tjrs |> head(5)
 #'
 #' # Caso ele não encontre nada, mostrará e um aviso e retornará um valor NULL
 #' tjrs_jurisprudencia(classe = "Direta de Inconstitucionalidade", julgamento_inicial = "01/01/2023", julgamento_final = "31/02/2023")
+#' }
 tjrs_jurisprudencia <- function(classe, julgamento_inicial = "", julgamento_final = "", .reportar = TRUE) {
   url <- "https://www.tjrs.jus.br/buscas/jurisprudencia/ajax.php"
 

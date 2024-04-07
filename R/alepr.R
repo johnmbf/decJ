@@ -45,9 +45,11 @@
 #' @import glue
 #'
 #' @examples
+#' \dontrun{
 #' alepr_projeto(prop_tipo = 1, prop_numero = 21890, prop_ano = 2024)
 #'
 #' alepr_projeto(prop_tipo = 4, prop_numero = 29, prop_ano = 2020)
+#' }
 #' @family legislativo
 alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", prop_ano = "", prop_conclusao = "", prop_assuntos = "", prop_chave = "", prop_sumula = "", .reportar = TRUE) {
 

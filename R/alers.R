@@ -10,9 +10,10 @@
 #' o proponente, o assunto, a ementa e a URL da proposição.
 #' @export
 #' @examples
+#' \dontrun{
 #' # Buscar informações sobre uma proposição legislativa
 #' alers_projeto(norma = 10098, ano = 1994)
-#'
+#'}
 #' @family legislativo
 alers_projeto <- function(norma, ano, .reportar = TRUE){
 

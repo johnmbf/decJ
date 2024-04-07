@@ -68,9 +68,11 @@ podem incluir o tipo de proposição, autores, número, ano, conclusão, assunto
 e sumula.
 }
 \examples{
+\dontrun{
 alepr_projeto(prop_tipo = 1, prop_numero = 21890, prop_ano = 2024)
 
 alepr_projeto(prop_tipo = 4, prop_numero = 29, prop_ano = 2020)
+}
 }
 \seealso{
 Other legislativo: 
