@@ -28,12 +28,13 @@ Esta função extrai jurisprudência do Supremo Tribunal Federal (STF) utilizand
 Você pode pesquisar por palavras-chave ou por classe de processo.
 }
 \examples{
+\dontrun{
 # Buscar jurisprudência por palavras-chave
 stf_jurisprudencia(busca = "direitos humanos", base = 'decisoes', quantidade = 10)
 
 # Buscar jurisprudência por classe de processo
 stf_jurisprudencia(classe = "ADPF", base = 'acordaos', quantidade = 10)
-
+}
 }
 \seealso{
 Other stf: 

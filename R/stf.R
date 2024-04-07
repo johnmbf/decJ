@@ -19,9 +19,10 @@
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
+#' \dontrun{
 #' stf_partes("ADPF", "800")
 #' stf_partes("ADPF", c("800", "900"))
-#'
+#'}
 #' @family stf
 stf_partes <- function(classe, processo){
   classe <- base::toupper(classe)
@@ -78,9 +79,10 @@ stf_partes <- function(classe, processo){
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
+#' \dontrun{
 #' stf_info("ADPF", "800")
 #' stf_info("ADPF", c("900", "800"))
-#'
+#'}
 #' @family stf
 stf_info <- function(classe, processo){
   classe <- base::toupper(classe)
@@ -142,9 +144,10 @@ stf_info <- function(classe, processo){
 #' @importFrom stringr str_split_i str_trim
 #' @export
 #' @examples
+#' \dontrun{
 #' stf_relator("ADPF", "800")
 #' stf_relator("ADPF", c("800", "900"))
-#'
+#'}
 #' @family stf
 stf_relator = function(classe, processo){
   classe <- base::toupper(classe)
@@ -204,9 +207,10 @@ stf_relator = function(classe, processo){
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
+#' \dontrun{
 #' stf_decisoes("ADPF", "800")
 #' stf_decisoes("ADPF", c("800", "900"))
-#'
+#'}
 #' @family stf
 stf_decisoes = function(classe, processo){
   classe <- base::toupper(classe)
@@ -284,9 +288,10 @@ stf_decisoes = function(classe, processo){
 #' @importFrom xml2 xml_attr
 #' @export
 #' @examples
+#' \dontrun{
 #' # Baixar a petição inicial do processo com número 12345 da classe "RE"
 #' stf_inicial(classe = "ADPF", n = 800, arquivo = ".")
-#'
+#'}
 #' @family stf
 stf_inicial <- function(classe, n, arquivo) {
 
@@ -364,12 +369,13 @@ stf_inicial <- function(classe, n, arquivo) {
 #' @importFrom jsonlite fromJSON
 #' @export
 #' @examples
+#' \dontrun{
 #' # Buscar jurisprudência por palavras-chave
 #' stf_jurisprudencia(busca = "direitos humanos", base = 'decisoes', quantidade = 10)
 #'
 #' # Buscar jurisprudência por classe de processo
 #' stf_jurisprudencia(classe = "ADPF", base = 'acordaos', quantidade = 10)
-#'
+#'}
 #' @family stf
 stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -423,12 +429,13 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' @importFrom stringr str_split_i
 #' @export
 #' @examples
+#' \dontrun{
 #' # Baixar jurisprudência por palavras-chave
 #' stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = ".")
 #'
 #' # Baixar jurisprudência por classe de processo
 #' stf_jurisprudencia_download(classe = "ADPF", base = 'acordaos', quantidade = 10, arquivo = ".")
-#'
+#'}
 #' @family stf
 stf_jurisprudencia_download = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
 

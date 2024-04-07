@@ -26,9 +26,10 @@ e retorna um \code{data.frame} contendo informações sobre o processo, incluind
 (ajuizamento) e o assunto do processo.
 }
 \examples{
+\dontrun{
 stf_info("ADPF", "800")
 stf_info("ADPF", c("900", "800"))
-
+}
 }
 \seealso{
 Other stf: 

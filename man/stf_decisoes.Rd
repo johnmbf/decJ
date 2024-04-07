@@ -27,9 +27,10 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre as decisões do processo.
 }
 \examples{
+\dontrun{
 stf_decisoes("ADPF", "800")
 stf_decisoes("ADPF", c("800", "900"))
-
+}
 }
 \seealso{
 Other stf: 

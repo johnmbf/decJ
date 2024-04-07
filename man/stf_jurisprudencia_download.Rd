@@ -29,12 +29,13 @@ Você pode pesquisar por palavras-chave ou por classe de processo e especificar 
 Os documentos são salvos como arquivos PDF.
 }
 \examples{
+\dontrun{
 # Baixar jurisprudência por palavras-chave
 stf_jurisprudencia_download(busca = "direitos humanos", base = "acordaos", quantidade = 10, arquivo = ".")
 
 # Baixar jurisprudência por classe de processo
 stf_jurisprudencia_download(classe = "ADPF", base = 'acordaos', quantidade = 10, arquivo = ".")
-
+}
 }
 \seealso{
 Other stf: 

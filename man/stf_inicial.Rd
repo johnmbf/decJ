@@ -20,9 +20,10 @@ Esta função não retorna nada explicitamente. Ela salva os arquivos PDF da pet
 Esta função permite baixar a petição inicial de processos do Supremo Tribunal Federal (STF) com base nos parâmetros fornecidos.
 }
 \examples{
+\dontrun{
 # Baixar a petição inicial do processo com número 12345 da classe "RE"
 stf_inicial(classe = "ADPF", n = 800, arquivo = ".")
-
+}
 }
 \seealso{
 Other stf: 
