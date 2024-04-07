@@ -1,12 +1,14 @@
-#' Consulta projetos legislativos no site da Assembleia Legislativa do Estado do Paraná
+#' Consulta projetos legislativos no site da Assembleia Legislativa do Estado do
+#' Paraná.
 #'
-#' Esta função realiza uma consulta aos projetos legislativos no site da Assembleia
-#' Legislativa do Estado do Paraná, com base nos parâmetros fornecidos. Os parâmetros
-#' podem incluir o tipo de proposição, autores, número, ano, conclusão, assuntos, chave
-#' e sumula.
+#' @description
+#' Esta função realiza uma consulta aos projetos legislativos no site da
+#' Assembleia Legislativa do Estado do Paraná, com base nos parâmetros
+#' fornecidos. Os parâmetros podem incluir o tipo de proposição, autores,
+#' número, ano, conclusão, assuntos, chave e sumula.
 #'
-#' @param prop_tipo Tipo da proposição. Pode ser vazio (todos os tipos) ou um número de 1 a 11,
-#' onde:
+#' @param prop_tipo Tipo da proposição. Pode ser vazio (todos os tipos) ou um
+#'   número de 1 a 11, onde:
 #'   - 1: Lei
 #'   - 2: Lei Complementar
 #'   - 3: Resolução
@@ -20,8 +22,8 @@
 #' @param prop_autores Autores da proposição.
 #' @param prop_numero Número da proposição.
 #' @param prop_ano Ano da proposição.
-#' @param prop_conclusao Status de conclusão da proposição. Pode ser vazio (todos os tipos) ou um
-#' número de 0 a 5, onde:
+#' @param prop_conclusao Status de conclusão da proposição. Pode ser vazio
+#'   (todos os tipos) ou um número de 0 a 5, onde:
 #'   - 0: Sancionada
 #'   - 1: Promulgada
 #'   - 2: Sancionada/Republicada
@@ -31,10 +33,11 @@
 #' @param prop_assuntos Assuntos relacionados à proposição.
 #' @param prop_chave Chave da proposição.
 #' @param prop_sumula Sumula da proposição.
-#' @param .reportar Valor lógico indicando se deve reportar a ação realizada. Padrão é TRUE.
+#' @param .reportar Valor lógico indicando se deve reportar a ação realizada.
+#'   Padrão é TRUE.
 #'
-#' @return Retorna uma tabela com os projetos legislativos correspondentes aos parâmetros fornecidos.
-#' Se nenhum projeto for encontrado, retorna NULL.
+#' @return Retorna uma tabela com os projetos legislativos correspondentes aos
+#'   parâmetros fornecidos. Se nenhum projeto for encontrado, retorna NULL.
 #'
 #' @export
 #'
@@ -103,7 +106,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
 
   # Verifica erro
   if (res$status_code != 200) {
-    print("Erro. Requisicao retornou erro. Verifique os parametros")
+    cat("Erro. Requisi\u00e7\u00e3o retornou erro. Verifique os par\u00e2metros")
     return(NULL)
   }
 
@@ -114,7 +117,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
   tabela <- rvest::html_table(conteudo)
 
   if (length(tabela) == 0) {
-    cat("A funcao nao retornou nenhum projeto. Verifique os parametros informados")
+    cat("A fun\u00e7\u00e3o n\u00e3o retornou nenhum projeto. Verifique os par\u00e2metros informados")
     return(NULL)
   }
 
@@ -138,7 +141,7 @@ alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", p
   # Retorna a tabela
 
   if (.reportar == TRUE) {
-    glue::glue("Extrai do site da Assembleia Legislativa do Estado do Parana as informacoes sobre a proposicao que deu origem a norma n {prop_numero} de {prop_ano}") |> cat()
+    glue::glue("Extra\u00ed do site da Assembleia Legislativa do Estado do Paran\u00e1 as informa\u00e7\u00f5es sobre a proposi\u00e7\u00e3o que deu origem a norma n {prop_numero} de {prop_ano}") |> cat()
   }
 
   tabela

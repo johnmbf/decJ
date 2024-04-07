@@ -4,6 +4,12 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/familia_stf.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -56,6 +62,9 @@
   </url>
   <url>
     <loc>/reference/tjrs_jurisprudencia.html</loc>
+  </url>
+  <url>
+    <loc>/reference/utilitario_remover_acentos.html</loc>
   </url>
   <url>
     <loc>/reference/utilitario_remover_cr.html</loc>

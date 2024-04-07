@@ -4,6 +4,7 @@
 #' utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
 #' e retorna um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
 #'
+#'
 #' @param classe A classe do processo, em maiúsculas. Por exemplo, "RE", "HC", "ADI", etc.
 #' @param processo O número do processo ou uma lista de números de processo.
 #' @return Um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
@@ -24,6 +25,10 @@
 #' stf_partes("ADPF", c("800", "900"))
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_partes <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -84,6 +89,10 @@ stf_partes <- function(classe, processo){
 #' stf_info("ADPF", c("900", "800"))
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_info <- function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -149,6 +158,10 @@ stf_info <- function(classe, processo){
 #' stf_relator("ADPF", c("800", "900"))
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_relator = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -212,6 +225,10 @@ stf_relator = function(classe, processo){
 #' stf_decisoes("ADPF", c("800", "900"))
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_decisoes = function(classe, processo){
   classe <- base::toupper(classe)
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
@@ -293,6 +310,10 @@ stf_decisoes = function(classe, processo){
 #' stf_inicial(classe = "ADPF", n = 800, arquivo = ".")
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_inicial <- function(classe, n, arquivo) {
 
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
@@ -377,6 +398,10 @@ stf_inicial <- function(classe, n, arquivo) {
 #' stf_jurisprudencia(classe = "ADPF", base = 'acordaos', quantidade = 10)
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25){
   header <- httr::add_headers("User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51")
 
@@ -438,6 +463,10 @@ stf_jurisprudencia = function(busca = NULL, classe = NULL, base = c("acordaos", 
 #' stf_jurisprudencia_download(classe = "ADPF", base = 'acordaos', quantidade = 10, arquivo = ".")
 #'}
 #' @family stf
+#'
+#' @details
+#' Para mais detalhes, acesse:
+#' \code{vignette("familia_stf", package = "decJ")}
 stf_jurisprudencia_download = function(busca = NULL, classe = NULL, base = c("acordaos", "decisoes"), quantidade = 25, arquivo = "."){
 
   if (!is.null(busca) & is.null(classe)) {

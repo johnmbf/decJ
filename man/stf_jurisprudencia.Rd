@@ -27,6 +27,10 @@ Um \code{data.frame} contendo as informações da jurisprudência encontrada.
 Esta função extrai jurisprudência do Supremo Tribunal Federal (STF) utilizando a API do portal de jurisprudência STF.
 Você pode pesquisar por palavras-chave ou por classe de processo.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 # Buscar jurisprudência por palavras-chave

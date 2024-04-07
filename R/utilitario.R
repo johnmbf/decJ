@@ -90,3 +90,39 @@ utilitario_remover_cr <- function(txt_path = '.', rodape = 4, cabecalho = 2){
     )
   }, .progress = TRUE)
 }
+
+#' Remove acentos de um determinado texto
+#'
+#' Esta função remove os acentos de textos.
+#'
+#' @param texto Um vetor de strings contendo os textos com acentos.
+#'
+#' @return Um vetor de strings com os acentos removidos.
+#'
+#' @examples
+#' utilitario_remover_acentos(c("Café", "Maçã", "São Paulo"))
+#'
+#' @details
+#' Esta função substitui os caracteres acentuados por suas
+#' versões não acentuadas. Por exemplo, "Café" é transformado em "Cafe".
+#'
+#' @details
+#' Esta função é semelhante à função \code{txt4cs::remove_accent()} do pacote \code{txt4cs},
+#' mas não depende de outros pacotes externos.
+#'
+#' @export
+utilitario_remover_acentos <- function(texto) {
+  substituicao <- c("\u00E1" = "a", "\u00E9" = "e", "\u00ED" = "i", "\u00F3" = "o", "\u00FA" = "u",
+                    "\u00E0" = "a", "\u00E8" = "e", "\u00EC" = "i", "\u00F2" = "o", "\u00F9" = "u",
+                    "\u00E3" = "a", "\u00F5" = "o", "\u00E2" = "a", "\u00EA" = "e", "\u00EE" = "i",
+                    "\u00F4" = "o", "\u00FB" = "u", "\u00E7" = "c", "\u00C1" = "A", "\u00C9" = "E",
+                    "\u00CD" = "I", "\u00D3" = "O", "\u00DA" = "U", "\u00C0" = "A", "\u00C8" = "E",
+                    "\u00CC" = "I", "\u00D2" = "O", "\u00D9" = "U", "\u00C3" = "A", "\u00D5" = "O",
+                    "\u00C2" = "A", "\u00CA" = "E", "\u00CE" = "I", "\u00D4" = "O", "\u00DB" = "U",
+                    "\u00C7" = "C")
+
+  texto_sacento <- chartr(paste(names(substituicao), collapse = ""),
+                              paste(substituicao, collapse = ""), texto)
+
+  return(texto_sacento)
+}

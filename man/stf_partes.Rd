@@ -25,6 +25,10 @@ Esta função extrai informações sobre as partes de processos judiciais no Sup
 utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
 e retorna um \code{data.frame} contendo informações sobre as partes envolvidas no processo.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 stf_partes("ADPF", "800")

@@ -19,6 +19,10 @@ Esta função não retorna nada explicitamente. Ela salva os arquivos PDF da pet
 \description{
 Esta função permite baixar a petição inicial de processos do Supremo Tribunal Federal (STF) com base nos parâmetros fornecidos.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 # Baixar a petição inicial do processo com número 12345 da classe "RE"

@@ -10,6 +10,8 @@
 
 * `tjrs_jurisprudencia()` agora possui uma forma de avisar ao usuário que a busca não retornou resultados. 
 
+* As funções agora estão respeitando a regra de caracteres ASCII.
+
 ## Novas funções
 
 * Nova `alepr_projeto()` permite que você extraia do site da Assembleia Legislativa do Paraná informações sobre proposições legislativas a partir de uma legislação já aprovada.
@@ -17,6 +19,8 @@
 * Nova `utilitario_tscolor()` permite que você crie uma paleta de cores para gráficos utilizando de cores referente as capas dos albuns da Taylor Swift. Até agora temos até o 1988 Taylor's Version. 
 
 * Nova `utilitario_remover_cr()` permite que você remova cabeçalhos e rodapés de arquivos de texto que foram convertidos de PDFs. A função é muito útil quando estamos analisando documentos e precisamos desconsiderar os cabeçalhos e rodapés. Os padrões da função foram testados com acórdãos do Supremo Tribunal Federal e foram suficientes. Talvez para trabalhar com outros tribunais ou documentos seja necessário calibrar a função.
+
+* Nova `utilitario_remover_acentos()` permite remover acentos do texto. É semelhante a função `txt4cs::remove_accent()` do pacote `txt4cs`, mas não possui dependências.
 
 ## Problemas
 

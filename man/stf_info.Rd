@@ -25,6 +25,10 @@ utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o
 e retorna um \code{data.frame} contendo informações sobre o processo, incluindo a data do protocolo
 (ajuizamento) e o assunto do processo.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 stf_info("ADPF", "800")

@@ -8,3 +8,5 @@
 ^\.github$
 ^\.teste$
 ^R/dicionario\.R$
+^doc$
+^Meta$

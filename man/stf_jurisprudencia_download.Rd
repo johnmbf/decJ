@@ -28,6 +28,10 @@ Esta função baixa jurisprudência do Supremo Tribunal Federal (STF) utilizando
 Você pode pesquisar por palavras-chave ou por classe de processo e especificar a quantidade de documentos a serem baixados.
 Os documentos são salvos como arquivos PDF.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 # Baixar jurisprudência por palavras-chave

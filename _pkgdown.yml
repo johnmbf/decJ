@@ -11,11 +11,16 @@ navbar:
       icon: fa-twitter
       href: https://twitter.com/jo_mbf
     intro:
-      text: "Introdução"
+      icon: fa-home
       href: index.html
     func:
       text: "Funções"
-      href: reference/index.html
+      menu:
+        - text: "Lista de funções"
+          href: reference/index.html
+        - text: -------
+        - text: "Usando a família STF"
+          href: articles/familia_stf.html
     news:
       text: "Novidades"
       href: news/index.html

@@ -26,6 +26,10 @@ Esta função extrai informações sobre as decisões de um processo judicial no
 utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
 e retorna um \code{data.frame} contendo informações sobre as decisões do processo.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 stf_decisoes("ADPF", "800")

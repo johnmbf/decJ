@@ -23,6 +23,10 @@ Esta função extrai informações sobre o relator de um processo judicial no Su
 utilizando a API do portal STF. Ela recebe como entrada a classe do processo e o número do processo
 e retorna um \code{data.frame} contendo informações sobre o relator do processo.
 }
+\details{
+Para mais detalhes, acesse:
+\code{vignette("familia_stf", package = "decJ")}
+}
 \examples{
 \dontrun{
 stf_relator("ADPF", "800")

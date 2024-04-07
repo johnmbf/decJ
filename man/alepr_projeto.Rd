@@ -2,7 +2,8 @@
 % Please edit documentation in R/alepr.R
 \name{alepr_projeto}
 \alias{alepr_projeto}
-\title{Consulta projetos legislativos no site da Assembleia Legislativa do Estado do Paraná}
+\title{Consulta projetos legislativos no site da Assembleia Legislativa do Estado do
+Paraná.}
 \usage{
 alepr_projeto(
   prop_tipo = "",
@@ -17,8 +18,8 @@ alepr_projeto(
 )
 }
 \arguments{
-\item{prop_tipo}{Tipo da proposição. Pode ser vazio (todos os tipos) ou um número de 1 a 11,
-onde:
+\item{prop_tipo}{Tipo da proposição. Pode ser vazio (todos os tipos) ou um
+número de 1 a 11, onde:
 \itemize{
 \item 1: Lei
 \item 2: Lei Complementar
@@ -38,8 +39,8 @@ onde:
 
 \item{prop_ano}{Ano da proposição.}
 
-\item{prop_conclusao}{Status de conclusão da proposição. Pode ser vazio (todos os tipos) ou um
-número de 0 a 5, onde:
+\item{prop_conclusao}{Status de conclusão da proposição. Pode ser vazio
+(todos os tipos) ou um número de 0 a 5, onde:
 \itemize{
 \item 0: Sancionada
 \item 1: Promulgada
@@ -55,17 +56,18 @@ número de 0 a 5, onde:
 
 \item{prop_sumula}{Sumula da proposição.}
 
-\item{.reportar}{Valor lógico indicando se deve reportar a ação realizada. Padrão é TRUE.}
+\item{.reportar}{Valor lógico indicando se deve reportar a ação realizada.
+Padrão é TRUE.}
 }
 \value{
-Retorna uma tabela com os projetos legislativos correspondentes aos parâmetros fornecidos.
-Se nenhum projeto for encontrado, retorna NULL.
+Retorna uma tabela com os projetos legislativos correspondentes aos
+parâmetros fornecidos. Se nenhum projeto for encontrado, retorna NULL.
 }
 \description{
-Esta função realiza uma consulta aos projetos legislativos no site da Assembleia
-Legislativa do Estado do Paraná, com base nos parâmetros fornecidos. Os parâmetros
-podem incluir o tipo de proposição, autores, número, ano, conclusão, assuntos, chave
-e sumula.
+Esta função realiza uma consulta aos projetos legislativos no site da
+Assembleia Legislativa do Estado do Paraná, com base nos parâmetros
+fornecidos. Os parâmetros podem incluir o tipo de proposição, autores,
+número, ano, conclusão, assuntos, chave e sumula.
 }
 \examples{
 \dontrun{

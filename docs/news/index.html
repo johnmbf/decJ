@@ -19,10 +19,18 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../index.html">Introdução</a>
+  <a class="nav-link" href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Funções</a>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-fun-es">Funções</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-fun-es">
+    <a class="dropdown-item" href="../reference/index.html">Lista de funções</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/familia_stf.html">Usando a família STF</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../news/index.html">Novidades</a>
@@ -61,12 +69,14 @@
 <li><p>Os dados que antes eram acessíveis pelo pacote se tornaram internos. Eles ainda podem ser acessados dentro de <code>R/sysdata.rda</code>.</p></li>
 <li><p><code><a href="../reference/stf_jurisprudencia_download.html">stf_jurisprudencia_download()</a></code> agora funciona como <code><a href="../reference/stf_jurisprudencia.html">stf_jurisprudencia()</a></code> aceitando tanto a busca por classe quanto por palavras-chave.</p></li>
 <li><p><code><a href="../reference/tjrs_jurisprudencia.html">tjrs_jurisprudencia()</a></code> agora possui uma forma de avisar ao usuário que a busca não retornou resultados.</p></li>
+<li><p>As funções agora estão respeitando a regra de caracteres ASCII.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="novas-funções-1-0-0-900">Novas funções<a class="anchor" aria-label="anchor" href="#novas-fun%C3%A7%C3%B5es-1-0-0-900"></a></h3>
 <ul><li><p>Nova <code><a href="../reference/alepr_projeto.html">alepr_projeto()</a></code> permite que você extraia do site da Assembleia Legislativa do Paraná informações sobre proposições legislativas a partir de uma legislação já aprovada.</p></li>
 <li><p>Nova <code><a href="../reference/utilitario_tscolor.html">utilitario_tscolor()</a></code> permite que você crie uma paleta de cores para gráficos utilizando de cores referente as capas dos albuns da Taylor Swift. Até agora temos até o 1988 Taylor’s Version.</p></li>
 <li><p>Nova <code><a href="../reference/utilitario_remover_cr.html">utilitario_remover_cr()</a></code> permite que você remova cabeçalhos e rodapés de arquivos de texto que foram convertidos de PDFs. A função é muito útil quando estamos analisando documentos e precisamos desconsiderar os cabeçalhos e rodapés. Os padrões da função foram testados com acórdãos do Supremo Tribunal Federal e foram suficientes. Talvez para trabalhar com outros tribunais ou documentos seja necessário calibrar a função.</p></li>
+<li><p>Nova <code><a href="../reference/utilitario_remover_acentos.html">utilitario_remover_acentos()</a></code> permite remover acentos do texto. É semelhante a função <code><a href="https://rdrr.io/pkg/txt4cs/man/remove_accent.html" class="external-link">txt4cs::remove_accent()</a></code> do pacote <code>txt4cs</code>, mas não possui dependências.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="problemas-1-0-0-900">Problemas<a class="anchor" aria-label="anchor" href="#problemas-1-0-0-900"></a></h3>
