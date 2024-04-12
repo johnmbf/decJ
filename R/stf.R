@@ -315,65 +315,73 @@ stf_decisoes = function(classe, processo){
 #' Para mais detalhes, acesse:
 #' \code{vignette("familia_stf", package = "decJ")}
 stf_inicial <- function(classe, n, arquivo) {
-
   UA <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.51"
 
-  for (i in n) { ## faça isso em cada processo ##
-
-    # Busque no site o processo
-    getProcesso <- httr::GET(
-      paste(
-        "https://portal.stf.jus.br/processos/listarProcessos.asp?classe=",
-        classe,
-        "&numeroProcesso=",
-        i,
-        sep = ""
-      ),
-      httr::add_headers(
-        "User-Agent" = UA
-      )
+  # Busque no site o processo
+  getProcesso <- httr::GET(
+    paste(
+      "https://portal.stf.jus.br/processos/listarProcessos.asp?classe=",
+      classe,
+      "&numeroProcesso=",
+      n,
+      sep = ""
+    ),
+    httr::add_headers(
+      "User-Agent" = UA
     )
+  )
 
-    # Salve o incidente
-    getIncidente <- stringr::str_split_i(
-      getProcesso$url,
-      pattern = "=",
-      -1
-    )
-
-    # Consulta o processo eletrônico
-    getProcesso <- httr::GET(
-      paste("https://redir.stf.jus.br/estfvisualizadorpub/jsp/consultarprocessoeletronico/ConsultarProcessoEletronico.jsf?seqobjetoincidente=",
-            getIncidente,
-            sep = ""
-      ),
-      httr::add_headers(
-        "User-Agent" = UA
-      )
-    )
-
-    # Leia o conteúdo do processo
-    getConteudo <- httr::content(getProcesso, encoding = "UTF-8")
-
-    # Busca a petição inicial
-    getInicial <- getConteudo |>
-      rvest::html_element("a")
-
-    getInicial <- xml2::xml_attr(getInicial, "href")
-
-    # Salva o arquivo
-    httr::GET(
-      getInicial,
-      httr::add_headers(
-        "User-Agent" = UA
-      ),
-      httr::write_disk(paste(arquivo, i, "_inicial", ".pdf", sep = ""), T)
-    )
-
-    # Aguarde 5 segundos
-    date_time <- Sys.time()
-    while ((as.numeric(Sys.time()) - as.numeric(date_time)) < 5) {}
+  if (getProcesso$status_code != 200) {
+    glue::glue("Erro {getProcesso$status_code}") |> cat()
+    return(NULL)
   }
+
+  # Salve o incidente
+  getIncidente <- stringr::str_split_i(
+    getProcesso$url,
+    pattern = "=",
+    -1
+  )
+
+  # Consulta o processo eletrônico
+  getProcesso <- httr::GET(
+    paste("https://redir.stf.jus.br/estfvisualizadorpub/jsp/consultarprocessoeletronico/ConsultarProcessoEletronico.jsf?seqobjetoincidente=",
+          getIncidente,
+          sep = ""
+    ),
+    httr::add_headers(
+      "User-Agent" = UA
+    )
+  )
+
+  if (getProcesso$status_code != 200) {
+    glue::glue("Erro {getProcesso$status_code}")
+    return(NULL)
+  }
+
+  # Leia o conteúdo do processo
+  getConteudo <- httr::content(getProcesso, encoding = "UTF-8")
+
+  # Busca a petição inicial
+  getInicial <- getConteudo |>
+    rvest::html_element("a")
+
+  getInicial <- xml2::xml_attr(getInicial, "href")
+
+  if (is.na(getInicial)) {
+    a <- glue::glue("Não encontrei a Petição Inicial da {classe} {n}")
+    return(cat(a))
+  }
+
+  # Salva o arquivo
+  httr::GET(
+    getInicial,
+    httr::add_headers(
+      "User-Agent" = UA
+    ),
+    httr::write_disk(paste0(arquivo, classe, "_", n, "_inicial", ".pdf"), T)
+  )
+  invisible()
 }
 
 #' Extrai jurisprudência do Supremo Tribunal Federal (STF)

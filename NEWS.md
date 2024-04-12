@@ -1,3 +1,13 @@
+# decJ 1.0.0.9002
+
+## Correções
+
+* A função `stf_inicial()` agora retorna uma mensagem quando não encontrar a petição inicial. Ela não aceita mais receber como argumento lista de classes ou lista de número de ações. Mas você ainda pode baixar mais de uma petição inicial utilizando da função `purrr::walk()`, por exemplo.
+
+## Modificações
+
+* A função `oasis()` agora trabalha diretamente com a API do OASIS. O uso antigo dela não tratará, via de regra, problemas. Foram adicionados 2 novos argumentos de busca: tipo de busca e a ordem dos resultados; e um argumento para saber se os resultados serão as métricas da pesquisa. Incluimos uma função interna `oasis.interno()` que pode ser encontrada no arquivo R/oasis.R, essa função é adaptada dos desenvolvedores do dashboard de indicadores de pesquisa. Não deixe de acessar o trabalho deles [aqui](https://github.com/projetos-codic-ibict/Indicadores-oasisbr). A API do OASIS não funciona 100% e as vezes alguns problemas ocorrem, mas essa forma de busca é ainda mais efetiva do que a raspagem de tabelas em cada registro como feito pela função anterior. A documentação da API está [aqui](https://oasisbr.ibict.br/vufind/swagger-ui/).
+
 # decJ 1.0.0.9001
 
 ## Correções
