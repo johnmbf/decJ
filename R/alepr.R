@@ -1,148 +1,97 @@
-#' Consulta projetos legislativos no site da Assembleia Legislativa do Estado do
-#' Paraná.
+#' Função principal alepr_projeto
 #'
-#' @description
-#' Esta função realiza uma consulta aos projetos legislativos no site da
-#' Assembleia Legislativa do Estado do Paraná, com base nos parâmetros
-#' fornecidos. Os parâmetros podem incluir o tipo de proposição, autores,
-#' número, ano, conclusão, assuntos, chave e sumula.
+#' Esta função extrai dados da API da Assembleia Legislativa do Estado do Paraná.
 #'
-#' @param prop_tipo Tipo da proposição. Pode ser vazio (todos os tipos) ou um
-#'   número de 1 a 11, onde:
-#'   - 1: Lei
-#'   - 2: Lei Complementar
-#'   - 3: Resolução
-#'   - 4: Decreto Legislativo
-#'   - 5: Emenda Constitucional
-#'   - 6: Indicação Legislativa
-#'   - 7: Ato
-#'   - 10: Ofício
-#'   - 11: Documento de Designação
-#'   - 12: Portaria
-#' @param prop_autores Autores da proposição.
-#' @param prop_numero Número da proposição.
-#' @param prop_ano Ano da proposição.
-#' @param prop_conclusao Status de conclusão da proposição. Pode ser vazio
-#'   (todos os tipos) ou um número de 0 a 5, onde:
-#'   - 0: Sancionada
-#'   - 1: Promulgada
-#'   - 2: Sancionada/Republicada
-#'   - 3: Promulgada/Republicada
-#'   - 4: Revogada
-#'   - 5: Aprovada
-#' @param prop_assuntos Assuntos relacionados à proposição.
-#' @param prop_chave Chave da proposição.
-#' @param prop_sumula Sumula da proposição.
-#' @param .reportar Valor lógico indicando se deve reportar a ação realizada.
-#'   Padrão é TRUE.
-#'
-#' @return Retorna uma tabela com os projetos legislativos correspondentes aos
-#'   parâmetros fornecidos. Se nenhum projeto for encontrado, retorna NULL.
-#'
+#' @param ... Argumentos adicionais que serão passados para métodos específicos.
+#' @param .report Se TRUE, mostra informações sobre a extração de dados.
+#' @details
+#' ## Método data.frame
+#' Argumento obrigatório `obj` que deve ser um data.frame. E os argumentos opcionais: `numero`, `ano` e `codigoTipoNormaLegal`, que devem conter as colunas do data frame com os respectivos valores. Se você não quiser um resumo ao final, use `.report = FALSE`.
+#' ## Método numeric
 #' @export
-#'
-#' @importFrom httr POST user_agent
-#' @importFrom rvest html_table
-#' @importFrom dplyr select
-#' @importFrom tidyr pivot_wider
-#' @import glue
-#'
+#' @rdname alepr_projeto
+#' @usage
+#' alepr_projeto(...)
+#' @usage
+#' ## s3 method for class 'data.frame'
+#' alepr_projeto(
+#'  obj,
+#'  numero = NULL,
+#'  ano = NULL,
+#'  codigoTipoNormaLegal = NULL,
+#'  .report = TRUE)
 #' @examples
 #' \dontrun{
-#' alepr_projeto(prop_tipo = 1, prop_numero = 21890, prop_ano = 2024)
-#'
-#' alepr_projeto(prop_tipo = 4, prop_numero = 29, prop_ano = 2020)
+#' alepr_projeto()
 #' }
 #' @family legislativo
-alepr_projeto <- function(prop_tipo = "", prop_autores = "", prop_numero = "", prop_ano = "", prop_conclusao = "", prop_assuntos = "", prop_chave = "", prop_sumula = "", .reportar = TRUE) {
+alepr_projeto <- function(..., .report = TRUE) {
+  UseMethod('alepr_projeto')
+}
 
-  # Verificar se o prop_tipo é válido (deve ser entre 1 e 11 ou vazio)
-  ## Vazio - Todos os tipos
-  ## 1 - Lei
-  ## 2 - Lei Complementar
-  ## 3 - Resolução
-  ## 4 - Decreto Legislativo
-  ## 5 - Emenda Constitucional
-  ## 6 - Indicação Legislativa
-  ## 7 - Ato
-  ## 10 - Ofício
-  ## 11 - Documento de Designação
-  ## 12 - Portaria
-  if (prop_tipo != "" & !prop_tipo %in% 1:11) {
-    glue::glue("Prop_tipo {prop_tipo}. \n Prop_tipo deve ser vazio ou entre 1 e 11") |> print()
-    return(NULL)
-  }
-  # Verificar se o prop_conclusao é válido (deve ser vazio ou entre 0 e 5)
-  ## Vazio - Todos os tipos
-  ## 0 - Sancionada
-  ## 1 - Promulgada
-  ## 2 - Sancionada/Republicada
-  ## 3 - Promulgada/Republicada
-  ## 4 - Revogada
-  ## 5 - Aprovada
-  if (prop_conclusao != "" & !prop_conclusao %in% 0:5) {
-    glue::glue("Prop_conclusao {prop_conclusao}. \n Prop_conclusao deve ser vazio ou entre 0 e 5") |> print()
-    return(NULL)
-  }
+#' Método para extrair dados de um data frame
+#'
+#' Este método extrai dados da API da Assembleia Legislativa do Estado do Paraná com base em um data frame.
+#'
+#' @param obj Um data frame contendo os dados de entrada.
+#' @param numero Coluna do data frame contendo números de norma legal.
+#' @param ano Coluna do data frame contendo anos de norma legal.
+#' @param codigoTipoNormaLegal Coluna do data frame contendo códigos de tipo de norma legal.
+#' @param .report Se TRUE, mostra informações sobre a extração de dados.
+#' @return Um data frame contendo os dados extraídos da API.
+#' @method alepr_projeto data.frame
+#' @export
+#' @examples
+#' dados <- data.frame(numero = c(1, 2, 3), ano = c(2020, 2021, 2022), codigoTipoNormaLegal = c("A", "B", "C"))
+#' alepr_projeto.data.frame(dados)
+alepr_projeto.data.frame <- function(obj, numero = NULL, ano = NULL, codigoTipoNormaLegal = NULL, .report = TRUE){
+  url <- 'https://consultas.assembleia.pr.leg.br/api/public/norma-legal/filtrar'
 
-  # URL da requisição
-  url <- "http://portal.assembleia.pr.leg.br/index.php/pesquisa-legislativa/legislacao-estadual"
-
-  # Parâmetros da requisição
-  parametros <- list(
-    enviado = 1,
-    prop_tipo = prop_tipo,
-    prop_autores = prop_autores,
-    prop_numero = prop_numero,
-    prop_ano = prop_ano,
-    prop_conclusao = prop_conclusao,
-    prop_assuntos = prop_assuntos,
-    prop_chave = prop_chave,
-    prop_sumula = prop_sumula
+  cli::cli_progress_bar(
+    format = "Extraindo {cli::pb_bar} {cli::pb_porcent} ",
+    total = nrow(obj)
   )
+  for (i in 1:nrow(obj)){
+    if (!is.null(numero)) {
+      numero <- obj[[numero]][i]
+    }
+    if (!is.null(ano)) {
+      ano <- obj[[ano]][i]
+    }
+    if (!is.null(codigoTipoNormaLegal)) {
+      codigoTipoNormaLegal <- obj[[codigoTipoNormaLegal]][i]
+    }
 
-  # Requisição
-  res <- httr::POST( url, body = parametros, httr::user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"))
+    parametros <- list(
+      ano = ano,
+      codigoTipoNormaLegal = codigoTipoNormaLegal,
+      numero = numero,
+      numeroMaximoRegistro = 200
+    )
 
-  # Verifica erro
-  if (res$status_code != 200) {
-    cat("Erro. Requisi\u00e7\u00e3o retornou erro. Verifique os par\u00e2metros")
-    return(NULL)
+    a <- httr::POST(url, body = parametros, encode = 'json')
+
+    if (a$status_code != 0) {
+      cat("Erro ao acessar à API da ALEPR")
+      return(invisible())
+    }
+
+    a <- a |> httr::content(as = 'text') |> jsonlite::fromJSON()
+    a <- a |> purrr::pluck('lista')
+
+    if (i == 1) {
+      dados <- a
+    } else {
+      dados <- dplyr::bind_rows(dados, a)
+    }
+    cli::cli_progress_update()
+  }
+  cli::cli_progress_done()
+
+  if (.report == TRUE) {
+    cli::cli_alert_info("A função extraiu da Assembleia Legislativa do Estado do Paraná os dados solicitados.")
+    cli::cli_text("Os projetos foram propostos por {length(unique(dados$autores))} autor{?es} distinto{?s} sobre {length(unique(dados$assunto))} matéria{?s}")
   }
 
-  # Extrai o conteúdo
-  conteudo <- httr::content(res)
-
-  # Extrai a tabela com os dados
-  tabela <- rvest::html_table(conteudo)
-
-  if (length(tabela) == 0) {
-    cat("A fun\u00e7\u00e3o n\u00e3o retornou nenhum projeto. Verifique os par\u00e2metros informados")
-    return(NULL)
-  }
-
-  tabela <- tabela[[1]]
-  tabela <-
-    tabela |>
-    dplyr::select(1:2)
-
-  # Primeira linha da primeira coluna sempre sai vazio, atribui alguma informação
-  tabela[1, 1] <- "Norma"
-
-  # Pivota a tabela para deixar larga
-  tabela <-
-    tabela |>
-    tidyr::pivot_wider(
-      names_from = 1,
-      values_from = 2
-    ) |>
-    dplyr::select(1:7)
-
-  # Retorna a tabela
-
-  if (.reportar == TRUE) {
-    glue::glue("Extra\u00ed do site da Assembleia Legislativa do Estado do Paran\u00e1 as informa\u00e7\u00f5es sobre a proposi\u00e7\u00e3o que deu origem a norma n {prop_numero} de {prop_ano}") |> cat()
-  }
-
-  tabela
+  dados
 }

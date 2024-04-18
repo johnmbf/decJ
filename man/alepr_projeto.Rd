@@ -2,78 +2,38 @@
 % Please edit documentation in R/alepr.R
 \name{alepr_projeto}
 \alias{alepr_projeto}
-\title{Consulta projetos legislativos no site da Assembleia Legislativa do Estado do
-Paraná.}
+\title{Função principal alepr_projeto}
 \usage{
+alepr_projeto(...)
+
+## s3 method for class 'data.frame'
 alepr_projeto(
-  prop_tipo = "",
-  prop_autores = "",
-  prop_numero = "",
-  prop_ano = "",
-  prop_conclusao = "",
-  prop_assuntos = "",
-  prop_chave = "",
-  prop_sumula = "",
-  .reportar = TRUE
-)
+ obj,
+ numero = NULL,
+ ano = NULL,
+ codigoTipoNormaLegal = NULL,
+ .report = TRUE)
 }
 \arguments{
-\item{prop_tipo}{Tipo da proposição. Pode ser vazio (todos os tipos) ou um
-número de 1 a 11, onde:
-\itemize{
-\item 1: Lei
-\item 2: Lei Complementar
-\item 3: Resolução
-\item 4: Decreto Legislativo
-\item 5: Emenda Constitucional
-\item 6: Indicação Legislativa
-\item 7: Ato
-\item 10: Ofício
-\item 11: Documento de Designação
-\item 12: Portaria
-}}
+\item{...}{Argumentos adicionais que serão passados para métodos específicos.}
 
-\item{prop_autores}{Autores da proposição.}
-
-\item{prop_numero}{Número da proposição.}
-
-\item{prop_ano}{Ano da proposição.}
-
-\item{prop_conclusao}{Status de conclusão da proposição. Pode ser vazio
-(todos os tipos) ou um número de 0 a 5, onde:
-\itemize{
-\item 0: Sancionada
-\item 1: Promulgada
-\item 2: Sancionada/Republicada
-\item 3: Promulgada/Republicada
-\item 4: Revogada
-\item 5: Aprovada
-}}
-
-\item{prop_assuntos}{Assuntos relacionados à proposição.}
-
-\item{prop_chave}{Chave da proposição.}
-
-\item{prop_sumula}{Sumula da proposição.}
-
-\item{.reportar}{Valor lógico indicando se deve reportar a ação realizada.
-Padrão é TRUE.}
-}
-\value{
-Retorna uma tabela com os projetos legislativos correspondentes aos
-parâmetros fornecidos. Se nenhum projeto for encontrado, retorna NULL.
+\item{.report}{Se TRUE, mostra informações sobre a extração de dados.}
 }
 \description{
-Esta função realiza uma consulta aos projetos legislativos no site da
-Assembleia Legislativa do Estado do Paraná, com base nos parâmetros
-fornecidos. Os parâmetros podem incluir o tipo de proposição, autores,
-número, ano, conclusão, assuntos, chave e sumula.
+Esta função extrai dados da API da Assembleia Legislativa do Estado do Paraná.
+}
+\details{
+\subsection{Método data.frame}{
+
+Argumento obrigatório \code{obj} que deve ser um data.frame. E os argumentos opcionais: \code{numero}, \code{ano} e \code{codigoTipoNormaLegal}, que devem conter as colunas do data frame com os respectivos valores. Se você não quiser um resumo ao final, use \code{.report = FALSE}.
+}
+
+\subsection{Método numeric}{
+}
 }
 \examples{
 \dontrun{
-alepr_projeto(prop_tipo = 1, prop_numero = 21890, prop_ano = 2024)
-
-alepr_projeto(prop_tipo = 4, prop_numero = 29, prop_ano = 2020)
+alepr_projeto()
 }
 }
 \seealso{
